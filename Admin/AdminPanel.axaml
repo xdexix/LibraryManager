@@ -9,6 +9,6 @@
     <StackPanel VerticalAlignment="Center"> 
         <TextBlock Text="Введите пароль администратора" HorizontalAlignment="Center"/>
         <TextBox x:Name="passwordBox" HorizontalAlignment="Center" Width="200" PasswordChar="*" Margin="0,20,0,0"/>
-        <TextBlock Text="Enter для продолжения" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+        <Button Content="Продолжить" Width="200" Click="AdminPassword_Click" Margin="0,20,0,0" HorizontalAlignment="Center"/>
     </StackPanel>
 </Window>

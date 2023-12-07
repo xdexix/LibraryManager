@@ -14,22 +14,10 @@ namespace LibraryManager
             adminPanel.Show();
             this.Hide();
         }
-        private void AdminWindow_Click(object sender, RoutedEventArgs e)
-        {
-            var adminWindow = new AdminWindow();
-            adminWindow.Show();
-            this.Hide();
-        }
         private void UserPanel_Click(object sender, RoutedEventArgs e)
         {
             var userPanel = new UserPanel();
             userPanel.Show();
-            this.Hide();
-        }
-        private void UserWindow_Click(object sender, RoutedEventArgs e)
-        {
-            var userWindow = new UserWindow();
-            userWindow.Show();
             this.Hide();
         }
     }
