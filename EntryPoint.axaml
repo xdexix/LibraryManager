@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Class="LibraryManager.EntryPoint"
+        Title="Вход LibraryManager v1.0"
+        Width="400" Height="250">
+
+    <StackPanel VerticalAlignment="Center"> 
+        <Button Content="AdminWindow" Width="200" Click="AdminWindow_Click"/>
+        <Button Content="AdminPanel" Width="200" Click="AdminPanel_Click" Margin="0,20,0,0"/>
+        <Button Content="UserWindow" Width="200" Click="UserWindow_Click" Margin="0,20,0,0"/>
+        <Button Content="UserPanel" Width="200" Click="UserPanel_Click" Margin="0,20,0,0"/>
+    </StackPanel>
+</Window>
