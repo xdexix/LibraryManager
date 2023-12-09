@@ -13,22 +13,25 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = LibraryManager
-build_property.ProjectDir = /home/hbc/Рабочий стол/Stepanova/LibraryManager/
+build_property.ProjectDir = /home/hbc/Desktop/Курсач/LibraryManager/
 
-[/home/hbc/Рабочий стол/Stepanova/LibraryManager/Admin/AdminPanel.axaml]
+[/home/hbc/Desktop/Курсач/LibraryManager/Admin/AdminCreate.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/hbc/Рабочий стол/Stepanova/LibraryManager/Admin/AdminWindow.axaml]
+[/home/hbc/Desktop/Курсач/LibraryManager/Admin/AdminPanel.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/hbc/Рабочий стол/Stepanova/LibraryManager/App.axaml]
+[/home/hbc/Desktop/Курсач/LibraryManager/Admin/AdminWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/hbc/Рабочий стол/Stepanova/LibraryManager/EntryPoint.axaml]
+[/home/hbc/Desktop/Курсач/LibraryManager/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/hbc/Рабочий стол/Stepanova/LibraryManager/User/UserPanel.axaml]
+[/home/hbc/Desktop/Курсач/LibraryManager/EntryPoint.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/hbc/Рабочий стол/Stepanova/LibraryManager/User/UserWindow.axaml]
+[/home/hbc/Desktop/Курсач/LibraryManager/User/UserPanel.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/hbc/Desktop/Курсач/LibraryManager/User/UserWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

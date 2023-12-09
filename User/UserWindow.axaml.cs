@@ -1,7 +1,6 @@
-using System;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 namespace LibraryManager
 {
     public partial class UserWindow : Window

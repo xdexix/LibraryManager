@@ -1,8 +1,6 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 namespace LibraryManager
 {
     public partial class UserPanel : Window
@@ -12,6 +10,7 @@ namespace LibraryManager
             InitializeComponent();
             Bitmap bitmap = new Bitmap("Images/icon.png");
             this.Icon = new WindowIcon(bitmap);
+            IDBox.Focus();
         }
         private void UserID_Click(object sender, RoutedEventArgs e)
         {
@@ -20,7 +19,7 @@ namespace LibraryManager
             {
                 var adminWindow = new UserWindow(id);
                 adminWindow.Show();
-                this.Hide();
+                this.Close();
             }
             else
             {

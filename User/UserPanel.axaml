@@ -9,6 +9,6 @@
     <StackPanel VerticalAlignment="Center"> 
         <TextBlock Text="Введите свой идентификатор" HorizontalAlignment="Center"/>
         <TextBox x:Name="IDBox" HorizontalAlignment="Center" Width="200" Margin="0,20,0,0"/>
-        <Button Content="Продолжить" Width="200" Click="UserID_Click" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+        <Button Content="Продолжить" Width="200" Click="UserID_Click" Margin="0,20,0,0" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
     </StackPanel>
 </Window>

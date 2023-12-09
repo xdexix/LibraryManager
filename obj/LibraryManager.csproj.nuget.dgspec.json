@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/hbc/Рабочий стол/Stepanova/LibraryManager/LibraryManager.csproj": {}
+    "/home/hbc/Desktop/Курсач/LibraryManager/LibraryManager.csproj": {}
   },
   "projects": {
-    "/home/hbc/Рабочий стол/Stepanova/LibraryManager/LibraryManager.csproj": {
+    "/home/hbc/Desktop/Курсач/LibraryManager/LibraryManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/hbc/Рабочий стол/Stepanova/LibraryManager/LibraryManager.csproj",
+        "projectUniqueName": "/home/hbc/Desktop/Курсач/LibraryManager/LibraryManager.csproj",
         "projectName": "LibraryManager",
-        "projectPath": "/home/hbc/Рабочий стол/Stepanova/LibraryManager/LibraryManager.csproj",
+        "projectPath": "/home/hbc/Desktop/Курсач/LibraryManager/LibraryManager.csproj",
         "packagesPath": "/home/hbc/.nuget/packages/",
-        "outputPath": "/home/hbc/Рабочий стол/Stepanova/LibraryManager/obj/",
+        "outputPath": "/home/hbc/Desktop/Курсач/LibraryManager/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/hbc/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ab+kDECoSGu0Fq9usc2iglmlSY2ZGW26JYYIYUFhRbIYXDNgnZ2aF47R43m6jX/GFs0f3RGr3MERPN6vzY0mZg==",
+  "dgSpecHash": "wf+lNjKUv4Sb2rgrP11TTnhqI2tVMHk9O2/qPRFjp5AqjBoang7UVvlTpdL/tALmmciHIxbtFIlglGc2j4ih+w==",
   "success": true,
-  "projectFilePath": "/home/hbc/Рабочий стол/Stepanova/LibraryManager/LibraryManager.csproj",
+  "projectFilePath": "/home/hbc/Desktop/Курсач/LibraryManager/LibraryManager.csproj",
   "expectedPackageFiles": [
     "/home/hbc/.nuget/packages/avalonia/11.0.6/avalonia.11.0.6.nupkg.sha512",
     "/home/hbc/.nuget/packages/avalonia.angle.windows.natives/2.1.0.2023020321/avalonia.angle.windows.natives.2.1.0.2023020321.nupkg.sha512",
