@@ -1,12 +1,17 @@
+using System;
 using Avalonia.Controls;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 namespace LibraryManager
 {
     public partial class UserWindow : Window
     {
-        public UserWindow(int ID = 0)
-        {
+        public UserWindow(int id)
+        { 
             InitializeComponent();
-            HelloText.Text += ", привет ID " + ID.ToString();
+            Bitmap bitmap = new Bitmap("Images/icon.png");
+            this.Icon = new WindowIcon(bitmap);
+            HelloText.Text += ", " + id;
         }
     }
 }
