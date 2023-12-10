@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{181E08ED-F9D9-44F4-9203-B6DD6E0C8693}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Admin/AdminWindow.axaml.cs">
+    <Files>
+      <File FileName="Program.cs" Line="13" Column="1" />
+      <File FileName="Admin/AdminCreate.axaml.cs" Line="1" Column="1" />
+      <File FileName="Admin/AdminPanel.axaml.cs" Line="9" Column="28" />
+      <File FileName="Admin/AdminWindow.axaml.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LibraryManager" expanded="True">
+            <Node name="LibraryManager" expanded="True">
+              <Node name="Admin" expanded="True">
+                <Node name="AdminWindow.axaml.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.LibraryManager PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

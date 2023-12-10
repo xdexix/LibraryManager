@@ -21,6 +21,8 @@
 /home/hbc/.nuget/packages/avalonia.themes.simple/11.0.6/lib/net6.0/Avalonia.Themes.Simple.dll
 /home/hbc/.nuget/packages/avalonia.win32/11.0.6/lib/net6.0/Avalonia.Win32.dll
 /home/hbc/.nuget/packages/avalonia.x11/11.0.6/lib/net6.0/Avalonia.X11.dll
+/home/hbc/.nuget/packages/entityframework/6.4.4/lib/netstandard2.1/EntityFramework.dll
+/home/hbc/.nuget/packages/entityframework/6.4.4/lib/netstandard2.1/EntityFramework.SqlServer.dll
 /home/hbc/.nuget/packages/harfbuzzsharp/7.3.0/lib/net6.0/HarfBuzzSharp.dll
 /home/hbc/.nuget/packages/microcom.runtime/0.11.0/lib/net5.0/MicroCom.Runtime.dll
 /home/hbc/.nuget/packages/microsoft.codeanalysis.csharp/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.dll
@@ -36,8 +38,10 @@
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/mscorlib.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/netstandard.dll
 /home/hbc/.nuget/packages/skiasharp/2.88.6/lib/net6.0/SkiaSharp.dll
+/home/hbc/.nuget/packages/sqltools/1.6.2/lib/net45/SqlTools.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.AppContext.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Buffers.dll
+/home/hbc/.nuget/packages/system.codedom/4.7.0/ref/netstandard2.0/System.CodeDom.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Collections.Concurrent.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Collections.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Collections.Immutable.dll
@@ -49,12 +53,16 @@
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.ComponentModel.EventBasedAsync.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.ComponentModel.Primitives.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.ComponentModel.TypeConverter.dll
+/home/hbc/.nuget/packages/system.configuration.configurationmanager/4.7.0/ref/netstandard2.0/System.Configuration.ConfigurationManager.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Configuration.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Console.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Core.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Data.Common.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Data.DataSetExtensions.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Data.dll
+/home/hbc/.nuget/packages/system.data.sqlclient/4.8.1/ref/netcoreapp2.1/System.Data.SqlClient.dll
+/home/hbc/.nuget/packages/stub.system.data.sqlite.core.netstandard/1.0.118/lib/netstandard2.1/System.Data.SQLite.dll
+/home/hbc/.nuget/packages/system.data.sqlite.ef6/1.0.118/lib/netstandard2.1/System.Data.SQLite.EF6.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Diagnostics.Contracts.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Diagnostics.Debug.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Diagnostics.DiagnosticSource.dll
@@ -157,6 +165,7 @@
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Security.Cryptography.Primitives.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Security.Cryptography.X509Certificates.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Security.dll
+/home/hbc/.nuget/packages/system.security.permissions/4.7.0/ref/netcoreapp3.0/System.Security.Permissions.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Security.Principal.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Security.Principal.Windows.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Security.SecureString.dll
@@ -184,6 +193,7 @@
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Web.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Web.HttpUtility.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Windows.dll
+/home/hbc/.nuget/packages/system.windows.extensions/4.7.0/ref/netcoreapp3.0/System.Windows.Extensions.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Xml.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Xml.Linq.dll
 /usr/lib/dotnet/packs/Microsoft.NETCore.App.Ref/7.0.14/ref/net7.0/System.Xml.ReaderWriter.dll
