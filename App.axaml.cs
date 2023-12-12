@@ -12,7 +12,7 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new EntryPoint();
+            desktop.MainWindow = new AdminList(ListType.Librarian);
         }
         base.OnFrameworkInitializationCompleted();
     }
