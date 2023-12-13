@@ -7,11 +7,18 @@
         Width="800" Height="600">
 
     <StackPanel x:Name="MyStackPanel" VerticalAlignment="Center"> 
+        <StackPanel x:Name="Buttons" Orientation="Horizontal" HorizontalAlignment="Center" IsVisible="false">
+            <Button Content="Автор" Width="75" Margin="15" HorizontalContentAlignment="Center" Click="Button_Click"/>
+            <Button Content="Издательство" Width="120" Margin="15" HorizontalContentAlignment="Center" Click="Button_Click"/>
+            <Button Content="Читатель" Width="90" Margin="15" HorizontalContentAlignment="Center" Click="Button_Click"/>
+            <Button Content="Библиотекарь" Width="120" Margin="15" HorizontalContentAlignment="Center" Click="Button_Click"/>
+            <Button Content="Аренда" Width="80" Margin="15" HorizontalContentAlignment="Center" Click="Button_Click"/>
+            <Button Content="Книга" Width="75" Margin="15" HorizontalContentAlignment="Center" Click="Button_Click"/>
+        </StackPanel>
         <TextBlock Text="Поиск   " Height="50" HorizontalAlignment="Center">
-             <TextBox x:Name="findBox" Width="300" Changed="FindBox_TextChanged"/>
+             <TextBox x:Name="findBox" Width="300" TextChanged="FindBox_Changed"/>
         </TextBlock>
-        <ListBox x:Name="ObjectList" SelectionMode="Single" Width="750">
-        </ListBox>
-        <Button Content="Выбрать" Width="200" Margin="0,20,50,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Center"/>
+        <ListBox x:Name="ObjectList" SelectionMode="Single" Width="750" Height="400"/>
+        <Button Content="Выбрать" Width="200" Margin="0,20,25,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Click="SelectButton_Click"/>
     </StackPanel>
 </Window>
