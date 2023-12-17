@@ -18,7 +18,8 @@
         <TextBlock Text="Поиск   " Height="50" HorizontalAlignment="Center">
              <TextBox x:Name="findBox" Width="300" TextChanged="FindBox_Changed"/>
         </TextBlock>
-        <ListBox x:Name="ObjectList" SelectionMode="Single" Width="750" Height="400"/>
+        <TextBlock x:Name="BlockTypes" Text="Названия полей" Height="20" HorizontalAlignment="Center" FontSize="14" Width="750"/>
+        <ListBox x:Name="ObjectList" SelectionMode="Single" Width="750" Height="400" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <Button Content="Выбрать" Width="200" Margin="0,20,25,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Click="SelectButton_Click"/>
     </StackPanel>
 </Window>

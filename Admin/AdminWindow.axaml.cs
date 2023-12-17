@@ -36,6 +36,10 @@ namespace LibraryManager
                     adminWindow = new AdminCreate(Create.Librarian);
                     adminWindow.Show();
                     break;
+                case "Все записи":
+                    adminWindow = new AdminList(ListType.None);
+                    adminWindow.Show();
+                    break;
                 default: break;
             }
         }

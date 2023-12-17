@@ -12,7 +12,7 @@ namespace LibraryManager
     }
     public partial class AdminList : Window
     {
-        public CustomItem? SelectedItem { get; set; }
+        public string? SelectedItem { get; set; }
         public void CreateList(ListType type)
         {
             ObjectList.Items.Clear();
@@ -40,7 +40,7 @@ namespace LibraryManager
                     typeFields = new string[] {"ID", "Reader", "Librarian", "Status", "Start_t", "End_t"};
                     break;
                 case ListType.Book:
-                    ratio = "1111224";  baseType = "RENT";
+                    ratio = "1111314";  baseType = "BOOK";
                     typeFields = new string[] {"ID", "Autor", "Publishing", "Rent", "Title", "Publish", "Genre"};
                     break;
                 default:
@@ -49,6 +49,8 @@ namespace LibraryManager
             }
             if (type != ListType.None)
             {
+            BlockTypes.Text = "";
+            foreach (string name in typeFields) BlockTypes.Text += name + "\t\t\t";
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=Data/DataBase.db;Version=3;"))
             {
             connection.Open();
@@ -87,7 +89,11 @@ namespace LibraryManager
         {
             if (ObjectList.SelectedItem != null) 
             {
-                SelectedItem = (CustomItem)ObjectList.SelectedItem;
+                string selectedItemString = ObjectList.SelectedItem.ToString();
+                string[] parts = selectedItemString.Split(',');
+                string firstPart = parts[0];
+                string intValue = firstPart;
+                SelectedItem = intValue;
                 this.Close();
             }
         }

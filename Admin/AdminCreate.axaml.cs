@@ -34,8 +34,44 @@ namespace LibraryManager
 
             textBoxes.Add(textBox);
         }
+        public void CreateField(ListType NameField)
+        {
+            var stackPanel = this.FindControl<StackPanel>("MyStackPanel");
+
+            string nameField;
+            switch(NameField)
+            {
+                case ListType.Autor: nameField = "Автор"; break;
+                case ListType.Publishing: nameField = "Издательство"; break;
+                case ListType.Reader: nameField = "Читатель"; break;
+                default: nameField = " "; break;
+            }
+            var textBlock = new TextBlock();
+            textBlock.Text = nameField;
+            textBlock.Margin = new Avalonia.Thickness(0, 20, 0, 0);
+            textBlock.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
+
+            var button = new Button();
+            button.Content = "Выбрать";
+            button.Width = 200;
+            button.Margin = new Avalonia.Thickness(0, 10, 0, 0);
+            button.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
+            button.Click += (sender, e) => ButtonList_Click(button, e, NameField);
+
+            stackPanel?.Children.Add(textBlock);
+            stackPanel?.Children.Add(button);
+
+            buttons.Add(button);
+        }
+        private void ButtonList_Click(Button sender, RoutedEventArgs e, ListType type)
+        {
+            AdminList adminList = new AdminList(type);
+            adminList.Closed += (s, args) => { sender.Content = adminList.SelectedItem; };
+            adminList.Show();
+        }
         Create type;
         private List<TextBox> textBoxes = new List<TextBox>();
+        private List<Button> buttons = new List<Button>();
         public AdminCreate(Create create)
         { 
             InitializeComponent();
@@ -62,10 +98,12 @@ namespace LibraryManager
                     break;
                 case Create.Book: 
                     this.Title = "Новая книга";
-                    this.Height = 3 * 75 + 100;
-                    CreateField("ТУТ");
-                    CreateField("НИЧЕГО");
-                    CreateField("НЕТ");
+                    this.Height = 5 * 75 + 100;
+                    CreateField(ListType.Autor);
+                    CreateField(ListType.Publishing);
+                    CreateField("Название");
+                    CreateField("Год");
+                    CreateField("Жанр");
                     break;
                 case Create.Librarian: 
                     this.Title = "Новый библиотекарь";
@@ -103,6 +141,9 @@ namespace LibraryManager
                         break;
                     case Create.Librarian:
                         SaveLibrarian(connection);
+                        break;
+                    case Create.Book:
+                        SaveBook(connection);
                         break;
                 }
                 connection.Close();
@@ -180,6 +221,40 @@ namespace LibraryManager
             command.Parameters.AddWithValue("@Name", librarian.Name);
             command.Parameters.AddWithValue("@Surname", librarian.Surname);
             command.Parameters.AddWithValue("@POST", librarian.POST);
+
+            command.ExecuteNonQuery();
+            this.Close();
+        }
+        private void SaveBook(SQLiteConnection connection)
+        {
+            int parsedValue1;
+            int parsedValue2;
+            int.TryParse(buttons[0].Content?.ToString(), out parsedValue1);
+            int.TryParse(buttons[1].Content?.ToString(), out parsedValue2);
+            var book = new 
+            { 
+                Autor = parsedValue1, 
+                Publishing = parsedValue2, 
+                Rent = 0, 
+                Title = textBoxes[0].Text,
+                Publish = textBoxes[1].Text, 
+                Genre = textBoxes[2].Text
+            };
+
+            if (string.IsNullOrEmpty(book.Title) || string.IsNullOrEmpty(book.Publish) || string.IsNullOrEmpty(book.Genre))
+            {
+                return;
+            }
+
+            string sql = "INSERT INTO BOOK (Autor, Publishing, Rent, Title, Publish, Genre) VALUES (@Autor, @Publishing, @Rent, @Title, @Publish, @Genre)";
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+            command.Parameters.AddWithValue("@Autor", book.Autor);
+            command.Parameters.AddWithValue("@Publishing", book.Publishing);
+            command.Parameters.AddWithValue("@Rent", book.Rent);
+            command.Parameters.AddWithValue("@Title", book.Title);
+            command.Parameters.AddWithValue("@Publish", book.Publish);
+            command.Parameters.AddWithValue("@Genre", book.Genre);
 
             command.ExecuteNonQuery();
             this.Close();

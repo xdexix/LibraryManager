@@ -12,5 +12,7 @@
         <Button Content="Издательство" Width="200" Click="Button_Click" Margin="0,-30,50,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
         <Button Content="Книга" Width="200" Margin="50,20,0,0" Click="Button_Click" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
         <Button Content="Библиотекарь" Width="200" Margin="0,-30,50,0" Click="Button_Click" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+        <TextBlock Text="Просмотр записей" Margin="20" HorizontalAlignment="Center"/>
+        <Button Content="Все записи" Width="200" Click="Button_Click" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
     </StackPanel>
 </Window>
