@@ -17,6 +17,7 @@ namespace LibraryManager
 
     public partial class AdminCreate : Window
     {    
+        private int ID;
         public void CreateField(string nameField)
         {
             var stackPanel = this.FindControl<StackPanel>("MyStackPanel");
@@ -76,12 +77,12 @@ namespace LibraryManager
         Create type;
         private List<TextBox> textBoxes = new List<TextBox>();
         private List<Button> buttons = new List<Button>();
-        public AdminCreate(Create create, bool rent = false)
+        public AdminCreate(Create create, bool rent = false, int id = 0)
         { 
             InitializeComponent();
             Bitmap bitmap = new Bitmap("Images/plus.png");
             this.Icon = new WindowIcon(bitmap);
-            type = create;
+            type = create; ID = id;
             switch(create)
             {
                 case Create.Autor: 
@@ -127,9 +128,8 @@ namespace LibraryManager
                     break;
                 case Create.Rent: 
                     this.Title = "Новая аренда";
-                    this.Height = 3 * 75 + 100;
+                    this.Height = 2 * 75 + 100;
                     CreateField(ListType.Reader);
-                    CreateField(ListType.Librarian);
                     CreateField(ListType.Book, rent);
                     break;
                 default: break;
@@ -316,14 +316,13 @@ namespace LibraryManager
         }
         private void SaveRent(SQLiteConnection connection)
         {
-            int parsedValue1; int parsedValue2; int parsedValue3;
+            int parsedValue1; int parsedValue2;
             int.TryParse(buttons[0].Content?.ToString(), out parsedValue1);
             int.TryParse(buttons[1].Content?.ToString(), out parsedValue2);
-            int.TryParse(buttons[2].Content?.ToString(), out parsedValue3);
             var rent = new 
             { 
                 Reader = parsedValue1, 
-                Librarian = parsedValue2, 
+                Librarian = ID, 
                 Status = 1, 
                 Start_t = DateTime.Now.ToString(),
                 End_t = DateTime.Now.AddMonths(2).ToString()
@@ -340,7 +339,7 @@ namespace LibraryManager
 
             command.ExecuteNonQuery();
 
-            string new_sql = "SELECT ID FROM RENT WHERE Reader = @Reader AND Librarian = @Librarian AND Status = @Status AND Start_t = @Start_t AND End_t = @End_t";
+            string new_sql = "SELECT ID FROM RENT WHERE Reader = @Reader AND Librarian = @Librarian AND Status = @Status AND Start_t = @Start_t AND End_t = @End_t; SELECT last_insert_rowid()";
             SQLiteCommand new_command = new SQLiteCommand(new_sql, connection);
 
             new_command.Parameters.AddWithValue("@Reader", rent.Reader);
@@ -355,7 +354,7 @@ namespace LibraryManager
             SQLiteCommand updateCommand = new SQLiteCommand(updateSql, connection);
 
             updateCommand.Parameters.AddWithValue("@Rent", rentId);
-            updateCommand.Parameters.AddWithValue("@ID", parsedValue3);
+            updateCommand.Parameters.AddWithValue("@ID", parsedValue2);
 
             updateCommand.ExecuteNonQuery();
             

@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="LibraryManager.UserWindow"
         Title="Пользователь LibraryManager v1.0"
-        Width="550" Height="300">
+        Width="550" Height="400">
 
         <StackPanel VerticalAlignment="Center"> 
         <TextBlock Text="Создать запись" HorizontalAlignment="Center"/>
@@ -13,5 +13,8 @@
         <TextBlock Text="Просмотр записей" Margin="0,20,0,0" HorizontalAlignment="Center"/>
         <Button Content="Читатель" Width="200" Margin="50,20,0,0" Click="Button_List" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
         <Button Content="Аренда" Width="200" Click="Button_List" Margin="0,-30,50,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+        <Button Content="Книга" Width="200" Margin="0,20,0,0" Click="Button_List" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBlock Text="Удаление записей" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+        <Button Content="Аренда" Width="200" Margin="0,20,0,0" Click="Remove_List" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
     </StackPanel>
 </Window>

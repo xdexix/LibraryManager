@@ -148,6 +148,12 @@ namespace LibraryManager
                 ObjectList.Items.Add(item);
             }
         }
+        private void Reload_Click(object sender, RoutedEventArgs e)
+        {
+            CreateList(type);
+            full.Items.Clear();
+            foreach (var item in ObjectList.Items) { full.Items.Add(item); }
+        }
         ListType type;
         ItemsControl full = new ItemsControl();
         public AdminList(ListType _type, bool bookRent = false)

@@ -17,6 +17,7 @@
         </StackPanel>
         <TextBlock Text="Поиск   " Height="50" HorizontalAlignment="Center">
              <TextBox x:Name="findBox" Width="300" TextChanged="FindBox_Changed"/>
+             <Button Content="Перезагрузить" Width="200" Margin="20,0,0,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Click="Reload_Click"/>
         </TextBlock>
         <TextBlock x:Name="BlockTypes" Text="Названия полей" Height="20" HorizontalAlignment="Center" FontSize="14" Width="750"/>
         <ListBox x:Name="ObjectList" SelectionMode="Single" Width="750" Height="400" ScrollViewer.VerticalScrollBarVisibility="Auto"/>

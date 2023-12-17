@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Class="LibraryManager.RentList"
+        Title="Удаление LibraryManager v1.0"
+        Width="800" Height="600">
+
+    <StackPanel x:Name="MyStackPanel" VerticalAlignment="Center"> 
+        <TextBlock Text="Поиск   " Height="50" HorizontalAlignment="Center">
+             <TextBox x:Name="findBox" Width="300" TextChanged="FindBox_Changed"/>
+        </TextBlock>
+        <TextBlock x:Name="BlockTypes" Text="Названия полей" Height="20" HorizontalAlignment="Center" FontSize="14" Width="750"/>
+        <ListBox x:Name="ObjectList" SelectionMode="Multiple" Width="750" Height="400" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <Button Content="Удалить" Width="200" Margin="0,20,25,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Click="RemoveButton_Click"/>
+    </StackPanel>
+</Window>
