@@ -5,12 +5,14 @@ using Avalonia.Media.Imaging;
 using SqlTools;
 using System.Data.SQLite;
 using System.Linq;
+using System;
+using Tmds.DBus.Protocol;
 
 namespace LibraryManager
 {
     public enum Create
     {
-        Autor, Publishing, Book, Librarian
+        Autor, Publishing, Book, Librarian, Reader, Rent
     }
 
     public partial class AdminCreate : Window
@@ -34,7 +36,7 @@ namespace LibraryManager
 
             textBoxes.Add(textBox);
         }
-        public void CreateField(ListType NameField)
+        public void CreateField(ListType NameField, bool rent = false)
         {
             var stackPanel = this.FindControl<StackPanel>("MyStackPanel");
 
@@ -44,6 +46,8 @@ namespace LibraryManager
                 case ListType.Autor: nameField = "Автор"; break;
                 case ListType.Publishing: nameField = "Издательство"; break;
                 case ListType.Reader: nameField = "Читатель"; break;
+                case ListType.Book: nameField = "Книга"; break;
+                case ListType.Librarian: nameField = "Библиотекарь"; break;
                 default: nameField = " "; break;
             }
             var textBlock = new TextBlock();
@@ -56,23 +60,23 @@ namespace LibraryManager
             button.Width = 200;
             button.Margin = new Avalonia.Thickness(0, 10, 0, 0);
             button.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
-            button.Click += (sender, e) => ButtonList_Click(button, e, NameField);
+            button.Click += (sender, e) => ButtonList_Click(button, e, NameField, rent);
 
             stackPanel?.Children.Add(textBlock);
             stackPanel?.Children.Add(button);
 
             buttons.Add(button);
         }
-        private void ButtonList_Click(Button sender, RoutedEventArgs e, ListType type)
+        private void ButtonList_Click(Button sender, RoutedEventArgs e, ListType type, bool bookRent = false)
         {
-            AdminList adminList = new AdminList(type);
+            AdminList adminList = new AdminList(type, bookRent);
             adminList.Closed += (s, args) => { sender.Content = adminList.SelectedItem; };
             adminList.Show();
         }
         Create type;
         private List<TextBox> textBoxes = new List<TextBox>();
         private List<Button> buttons = new List<Button>();
-        public AdminCreate(Create create)
+        public AdminCreate(Create create, bool rent = false)
         { 
             InitializeComponent();
             Bitmap bitmap = new Bitmap("Images/plus.png");
@@ -112,6 +116,22 @@ namespace LibraryManager
                     CreateField("Фамилия");
                     CreateField("Индекс");
                     break;
+                case Create.Reader: 
+                    this.Title = "Новый читатель";
+                    this.Height = 5 * 75 + 100;
+                    CreateField("Имя");
+                    CreateField("Фамилия");
+                    CreateField("Email");
+                    CreateField("Телефон");
+                    CreateField("Адрес");
+                    break;
+                case Create.Rent: 
+                    this.Title = "Новая аренда";
+                    this.Height = 3 * 75 + 100;
+                    CreateField(ListType.Reader);
+                    CreateField(ListType.Librarian);
+                    CreateField(ListType.Book, rent);
+                    break;
                 default: break;
             }
             var stackPanel = this.FindControl<StackPanel>("MyStackPanel");
@@ -144,6 +164,12 @@ namespace LibraryManager
                         break;
                     case Create.Book:
                         SaveBook(connection);
+                        break;
+                    case Create.Reader:
+                        SaveReader(connection);
+                        break;
+                    case Create.Rent:
+                        SaveRent(connection);
                         break;
                 }
                 connection.Close();
@@ -257,6 +283,82 @@ namespace LibraryManager
             command.Parameters.AddWithValue("@Genre", book.Genre);
 
             command.ExecuteNonQuery();
+            this.Close();
+        }
+        private void SaveReader(SQLiteConnection connection)
+        {
+            var reader = new 
+            { 
+                Name = textBoxes[0].Text, 
+                Surname = textBoxes[1].Text, 
+                Email = textBoxes[2].Text,
+                Phone = textBoxes[3].Text,
+                Adress = textBoxes[4].Text
+            };
+
+            if (string.IsNullOrEmpty(reader.Name) || string.IsNullOrEmpty(reader.Surname) || string.IsNullOrEmpty(reader.Email)
+                || string.IsNullOrEmpty(reader.Phone) || string.IsNullOrEmpty(reader.Adress))
+            {
+                return;
+            }
+
+            string sql = "INSERT INTO READER (Name, Surname, Email, Phone, Adress) VALUES (@Name, @Surname, @Email, @Phone, @Adress)";
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+            command.Parameters.AddWithValue("@Name", reader.Name);
+            command.Parameters.AddWithValue("@Surname", reader.Surname);
+            command.Parameters.AddWithValue("@Email", reader.Email);
+            command.Parameters.AddWithValue("@Phone", reader.Phone);
+            command.Parameters.AddWithValue("@Adress", reader.Adress);
+
+            command.ExecuteNonQuery();
+            this.Close();
+        }
+        private void SaveRent(SQLiteConnection connection)
+        {
+            int parsedValue1; int parsedValue2; int parsedValue3;
+            int.TryParse(buttons[0].Content?.ToString(), out parsedValue1);
+            int.TryParse(buttons[1].Content?.ToString(), out parsedValue2);
+            int.TryParse(buttons[2].Content?.ToString(), out parsedValue3);
+            var rent = new 
+            { 
+                Reader = parsedValue1, 
+                Librarian = parsedValue2, 
+                Status = 1, 
+                Start_t = DateTime.Now.ToString(),
+                End_t = DateTime.Now.AddMonths(2).ToString()
+            };
+
+            string sql = "INSERT INTO RENT (Reader, Librarian, Status, Start_t, End_t) VALUES (@Reader, @Librarian, @Status, @Start_t, @End_t)";
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+            command.Parameters.AddWithValue("@Reader", rent.Reader);
+            command.Parameters.AddWithValue("@Librarian", rent.Librarian);
+            command.Parameters.AddWithValue("@Status", rent.Status);
+            command.Parameters.AddWithValue("@Start_t", rent.Start_t);
+            command.Parameters.AddWithValue("@End_t", rent.End_t);
+
+            command.ExecuteNonQuery();
+
+            string new_sql = "SELECT ID FROM RENT WHERE Reader = @Reader AND Librarian = @Librarian AND Status = @Status AND Start_t = @Start_t AND End_t = @End_t";
+            SQLiteCommand new_command = new SQLiteCommand(new_sql, connection);
+
+            new_command.Parameters.AddWithValue("@Reader", rent.Reader);
+            new_command.Parameters.AddWithValue("@Librarian", rent.Librarian);
+            new_command.Parameters.AddWithValue("@Status", rent.Status);
+            new_command.Parameters.AddWithValue("@Start_t", rent.Start_t);
+            new_command.Parameters.AddWithValue("@End_t", rent.End_t);
+
+            int rentId = (int)(long)new_command.ExecuteScalar();
+
+            string updateSql = "UPDATE BOOK SET Rent = @Rent WHERE ID = @ID";
+            SQLiteCommand updateCommand = new SQLiteCommand(updateSql, connection);
+
+            updateCommand.Parameters.AddWithValue("@Rent", rentId);
+            updateCommand.Parameters.AddWithValue("@ID", parsedValue3);
+
+            updateCommand.ExecuteNonQuery();
+            
             this.Close();
         }
     }

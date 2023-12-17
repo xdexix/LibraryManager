@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using System.Data.SQLite;
 using System.Linq;
+using System;
 namespace LibraryManager
 {
     public enum ListType
@@ -13,7 +14,7 @@ namespace LibraryManager
     public partial class AdminList : Window
     {
         public string? SelectedItem { get; set; }
-        public void CreateList(ListType type)
+        public void CreateList(ListType type, bool bookRent = false)
         {
             ObjectList.Items.Clear();
             string ratio; string baseType; string[] typeFields;
@@ -54,7 +55,8 @@ namespace LibraryManager
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=Data/DataBase.db;Version=3;"))
             {
             connection.Open();
-            using (SQLiteCommand command = new SQLiteCommand("SELECT * FROM " + baseType, connection))
+            string com = (bookRent) ? "SELECT * FROM " + baseType + " WHERE Rent = 0;": "SELECT * FROM " + baseType;
+            using (SQLiteCommand command = new SQLiteCommand(com, connection))
             {
             using (SQLiteDataReader reader = command.ExecuteReader())
             {
@@ -148,14 +150,14 @@ namespace LibraryManager
         }
         ListType type;
         ItemsControl full = new ItemsControl();
-        public AdminList(ListType _type)
+        public AdminList(ListType _type, bool bookRent = false)
         { 
             InitializeComponent();
             Bitmap bitmap = new Bitmap("Images/list.png");
             this.Icon = new WindowIcon(bitmap);
             if (_type == ListType.None) Buttons.IsVisible = true;
             type = _type;
-            CreateList(type);
+            CreateList(type, bookRent);
             foreach (var item in ObjectList.Items) { full.Items.Add(item); }
         }
     }

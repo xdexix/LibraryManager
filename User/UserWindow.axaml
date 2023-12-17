@@ -4,9 +4,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="LibraryManager.UserWindow"
         Title="Пользователь LibraryManager v1.0"
-        Width="800" Height="600">
+        Width="550" Height="300">
 
-    <StackPanel VerticalAlignment="Center"> 
-        <TextBlock x:Name="HelloText" Text="Тут че то будет" HorizontalAlignment="Center"/>
+        <StackPanel VerticalAlignment="Center"> 
+        <TextBlock Text="Создать запись" HorizontalAlignment="Center"/>
+        <Button Content="Читатель" Width="200" Margin="50,20,0,0" Click="Button_Create" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+        <Button Content="Аренда" Width="200" Click="Button_Create" Margin="0,-30,50,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+        <TextBlock Text="Просмотр записей" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+        <Button Content="Читатель" Width="200" Margin="50,20,0,0" Click="Button_List" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+        <Button Content="Аренда" Width="200" Click="Button_List" Margin="0,-30,50,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
     </StackPanel>
 </Window>
