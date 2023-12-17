@@ -56,12 +56,12 @@ namespace LibraryManager
                 using (var connection = new SQLiteConnection("Data Source=Data/DataBase.db")) 
                 {
                     connection.Open();
-                    foreach (var item in ObjectList.SelectedItems)
+                    foreach (var item in ObjectList.SelectedItems ?? full.Items)
                     {   
-                        string selectedItemString = item.ToString();
-                        string[] parts = selectedItemString.Split(',');
-                        string firstPart = parts[0];
-                        string intValue = firstPart;
+                        string? selectedItemString = item?.ToString();
+                        string[]? parts = selectedItemString?.Split(',');
+                        string? firstPart = parts?[0];
+                        string? intValue = firstPart;
 
                         string sql1 = "DELETE FROM RENT WHERE ID = @ID";
                         SQLiteCommand command1 = new SQLiteCommand(sql1, connection);
@@ -103,8 +103,8 @@ namespace LibraryManager
         }
         private void FindBox_Changed(object sender, TextChangedEventArgs e)
         {   
-            string? filteredText = findBox.Text;
-            var filteredItems = full.Items.Where(item => item?.ToString() != null && item.ToString().ToLower().Contains(filteredText.ToLower()));
+            string filteredText = (findBox.Text == null) ? "" : findBox.Text;
+            var filteredItems = full.Items.Where(item => (item?.ToString() ?? "").ToLower().Contains(filteredText.ToLower()));
             ObjectList.Items.Clear();
             foreach (var item in filteredItems)
             {

@@ -91,10 +91,10 @@ namespace LibraryManager
         {
             if (ObjectList.SelectedItem != null) 
             {
-                string selectedItemString = ObjectList.SelectedItem.ToString();
-                string[] parts = selectedItemString.Split(',');
-                string firstPart = parts[0];
-                string intValue = firstPart;
+                string? selectedItemString = ObjectList.SelectedItem.ToString();
+                string[]? parts = selectedItemString?.Split(',');
+                string? firstPart = parts?[0];
+                string? intValue = firstPart;
                 SelectedItem = intValue;
                 this.Close();
             }
@@ -117,7 +117,8 @@ namespace LibraryManager
             }
             public override string? ToString()
             {
-                return string.Join(", ", Parts);
+                if (Parts != null) return string.Join(", ", Parts);
+                else return "";
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -140,8 +141,8 @@ namespace LibraryManager
         }
         private void FindBox_Changed(object sender, TextChangedEventArgs e)
         {   
-            string? filteredText = findBox.Text;
-            var filteredItems = full.Items.Where(item => item?.ToString() != null && item.ToString().ToLower().Contains(filteredText.ToLower()));
+            string filteredText = (findBox.Text == null) ? "" : findBox.Text;
+            var filteredItems = full.Items.Where(item => (item?.ToString() ?? "").ToLower().Contains(filteredText.ToLower()));
             ObjectList.Items.Clear();
             foreach (var item in filteredItems)
             {
