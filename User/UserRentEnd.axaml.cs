@@ -150,7 +150,8 @@ namespace LibraryManager
         public RentList()
         { 
             InitializeComponent();
-            Bitmap bitmap = new Bitmap("Images/delete.png");
+            string imagePath = Path.Combine("Images", "delete.png");
+            Bitmap bitmap = new Bitmap(imagePath);
             this.Icon = new WindowIcon(bitmap);
             CreateRemoveList();
             foreach (var item in ObjectList.Items) { full.Items.Add(item); }

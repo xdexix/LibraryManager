@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System;
 using Tmds.DBus.Protocol;
+using System.IO;
 
 namespace LibraryManager
 {
@@ -112,7 +113,8 @@ namespace LibraryManager
         public AdminCreate(Create create, bool rent = false, int id = 0)
         { 
             InitializeComponent();
-            Bitmap bitmap = new Bitmap("Images/plus.png");
+            string imagePath = Path.Combine("Images", "plus.png");
+            Bitmap bitmap = new Bitmap(imagePath);
             this.Icon = new WindowIcon(bitmap);
             type = create; ID = id;
             switch(create)

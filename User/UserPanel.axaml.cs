@@ -1,3 +1,4 @@
+using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
@@ -16,7 +17,8 @@ namespace LibraryManager
         public UserPanel()
         { 
             InitializeComponent();
-            Bitmap bitmap = new Bitmap("Images/icon.png");
+            string imagePath = Path.Combine("Images", "icon.png");
+            Bitmap bitmap = new Bitmap(imagePath);
             this.Icon = new WindowIcon(bitmap);
             IDBox.Focus();
         }

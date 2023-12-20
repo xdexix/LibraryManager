@@ -5,6 +5,7 @@ using Avalonia.Media.Imaging;
 using System.Data.SQLite;
 using System.Linq;
 using System;
+using System.IO;
 namespace LibraryManager
 {
     /// <summary>
@@ -177,7 +178,8 @@ namespace LibraryManager
         public AdminList(ListType _type, bool bookRent = false)
         { 
             InitializeComponent();
-            Bitmap bitmap = new Bitmap("Images/list.png");
+            string imagePath = Path.Combine("Images", "list.png");
+            Bitmap bitmap = new Bitmap(imagePath);
             this.Icon = new WindowIcon(bitmap);
             if (_type == ListType.None) Buttons.IsVisible = true;
             type = _type;

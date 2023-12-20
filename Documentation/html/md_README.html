@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Library Manager: Документация по Library Manager</title>
+<title>Library Manager: LibraryManager</title>
 <link rel="icon" href="list.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -50,8 +50,6 @@ $(function() {
 });
 /* @license-end */
 </script>
-</div><!-- top -->
-<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -73,46 +71,57 @@ $(function() {
 </div>
 </div>
 
+</div><!-- top -->
+<div id="main-nav"></div>
 <div><div class="header">
-  <div class="headertitle"><div class="title">Документация по Library Manager </div></div>
+  <div class="headertitle"><div class="title">LibraryManager</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
-Введение</h1>
-<p>Добро пожаловать в документацию по Library Manager! Эта документация предоставляет подробную информацию о функциях и классах Library Manager.</p>
-<h1><a class="anchor" id="purpose_sec"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
+<h1><a class="anchor" id="autotoc_md1"></a>
 Назначение</h1>
 <p>Library Manager - это программное обеспечение, предназначенное для управления и организации коллекции книг библиотеки. Он предоставляет функциональность для добавления новых книг, удаления книг, поиска книг, а также для осуществления административных функций.</p>
-<h1><a class="anchor" id="usage_sec"></a>
-Использование</h1>
-<p>Использование происходит с помощью графического интерфейса.</p>
-<h1><a class="anchor" id="install_sec"></a>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Важно</h1>
+<p>Перед установкой убедитесь в том, что в вашей системе установлен .NET7 и SQLite.</p>
+<p>Установка этих пакетов для <b>Linux</b>:</p>
+<p>**.NET 7** для <b>Ubuntu 22.04</b> (<a href="https://learn.microsoft.com/ru-ru/dotnet/core/install/linux">https://learn.microsoft.com/ru-ru/dotnet/core/install/linux</a>): </p><div class="fragment"><div class="line">wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb</div>
+<div class="line"> </div>
+<div class="line">sudo dpkg -i packages-microsoft-prod.deb</div>
+<div class="line"> </div>
+<div class="line">sudo apt-get update</div>
+<div class="line"> </div>
+<div class="line">sudo apt-get install -y apt-transport-https</div>
+<div class="line"> </div>
+<div class="line">sudo apt-get update</div>
+<div class="line"> </div>
+<div class="line">sudo apt-get install -y dotnet-sdk-7.0</div>
+</div><!-- fragment --><p> <b>SQLite</b>: </p><div class="fragment"><div class="line">sudo apt-get install sqlite3</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
 Установка</h1>
-<h2><a class="anchor" id="step1"></a>
-Шаг 1: Скачайте пакет <a href="https://github.com/xdexix/LibraryManager.git">https://github.com/xdexix/LibraryManager.git</a> удобным вам способом.</h2>
-<pre class="fragment">$ git clone https://github.com/xdexix/LibraryManager.git </pre><h2><a class="anchor" id="step2"></a>
-Шаг 2: В зависимости от целевой платформы, произведите сборку (Необходим .NET7).</h2>
-<h3><a class="anchor" id="win"></a>
-Windows: откройте файл .sln в VisualStudio.</h3>
-<h3><a class="anchor" id="lin"></a>
-Linux: войдите в директорию проекта и выполните запуск.</h3>
-<pre class="fragment"> $ cd LibraryManager
- $ dotnet run </pre><h2><a class="anchor" id="step3"></a>
-Шаг 3: Если это необходимо, замените файл базы данных Data/DataBase.db.</h2>
-<pre class="fragment">$ cp [ваш файл] LibraryManager/Data/DataBase.db </pre><hr  />
-<h1><a class="anchor" id="contact_sec"></a>
-Контакты</h1>
-<p>Если у вас есть вопросы или проблемы, пожалуйста, свяжитесь с командой поддержки Library Manager по адресу <a href="#" onclick="location.href='mai'+'lto:'+'sup'+'po'+'rt@'+'li'+'bra'+'ry'+'man'+'ag'+'er.'+'co'+'m'; return false;">suppo<span class="obfuscator">.nosp@m.</span>rt@l<span class="obfuscator">.nosp@m.</span>ibrar<span class="obfuscator">.nosp@m.</span>yman<span class="obfuscator">.nosp@m.</span>ager.<span class="obfuscator">.nosp@m.</span>com</a>.</p>
-<hr  />
-<h1><a class="anchor" id="info_sec"></a>
+<ol type="1">
+<li>Скачайте пакет удобным вам способом.</li>
+</ol>
+<div class="fragment"><div class="line">git clone https://github.com/xdexix/LibraryManager.git</div>
+</div><!-- fragment --><ol type="1">
+<li><p class="startli">Произведите сборку в зависимости от целевой платформы.</p>
+<p class="startli"><b>Windows</b>: Откройте файл .sln в VisualStudio.</p>
+<p class="startli"><b>Linux и MscOS</b>: Войдите в директорию проекта и выполните запуск. </p><div class="fragment"><div class="line">cd LibraryManager</div>
+<div class="line"> </div>
+<div class="line">dotnet run </div>
+</div><!-- fragment --></li>
+<li>Если это необходимо, замените файл базы данных Data/DataBase.db. <div class="fragment"><div class="line">cp [ваш файл] LibraryManager/Data/DataBase.db </div>
+</div><!-- fragment --></li>
+</ol>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Полезные ссылки</h1>
 <p>.NET Windows: <a href="https://learn.microsoft.com/ru-ru/dotnet/core/install/windows">https://learn.microsoft.com/ru-ru/dotnet/core/install/windows</a></p>
 <p>.NET Linux: <a href="https://learn.microsoft.com/ru-ru/dotnet/core/install/linux">https://learn.microsoft.com/ru-ru/dotnet/core/install/linux</a></p>
 <p>.NET MasOS: <a href="https://learn.microsoft.com/ru-ru/dotnet/core/install/macos">https://learn.microsoft.com/ru-ru/dotnet/core/install/macos</a></p>
 <p>Диспетчер пакетов NuGet: <a href="https://learn.microsoft.com/ru-ru/nuget/">https://learn.microsoft.com/ru-ru/nuget/</a></p>
 <p>Браузер для базы данных SQLite: <a href="https://sqlitebrowser.org/">https://sqlitebrowser.org/</a> </p>
-</div></div><!-- PageDoc -->
-</div><!-- contents -->
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0

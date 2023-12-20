@@ -1,3 +1,4 @@
+using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
@@ -19,7 +20,8 @@ namespace LibraryManager
         public UserWindow(int id)
         { 
             InitializeComponent();
-            Bitmap bitmap = new Bitmap("Images/icon.png");
+            string imagePath = Path.Combine("Images", "icon.png");
+            Bitmap bitmap = new Bitmap(imagePath);
             this.Icon = new WindowIcon(bitmap);
             this.Title="ID" + id + " LibraryManager v1.0";
             ID = id;

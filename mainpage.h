@@ -29,7 +29,7 @@
  *
  * \subsection step3 Шаг 3: Если это необходимо, замените файл базы данных Data/DataBase.db.
  *
- * \verbatim cp [ваш файл] LibraryManager/Data/DataBase.db \endverbatim
+ * \verbatim $ cp [ваш файл] LibraryManager/Data/DataBase.db \endverbatim
 
  * <hr>
 
