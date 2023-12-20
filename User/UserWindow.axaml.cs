@@ -3,9 +3,19 @@ using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 namespace LibraryManager
 {
+    /// <summary>
+    /// Класс окна интерфейса для пользователя.
+    /// </summary>
     public partial class UserWindow : Window
     {
-        private int ID;
+        /// ID библиотекаря.
+        private int ID; 
+        /// <summary>
+        /// Конструктор UserWindow.
+        /// Инициализирует компоненты окна и устанавливает иконку icon.png.
+        /// Устанавливает название окна в соответствии с ID вошедшего.
+        /// </summary>
+        /// <param name="id">ID библиотекаря.</param>
         public UserWindow(int id)
         { 
             InitializeComponent();
@@ -14,6 +24,10 @@ namespace LibraryManager
             this.Title="ID" + id + " LibraryManager v1.0";
             ID = id;
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопки создания.
+        /// Создает новый экземляр AdminCreate нужного типа.
+        /// </summary>
         private void Button_Create(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -27,6 +41,10 @@ namespace LibraryManager
             AdminCreate create = new AdminCreate(type, rent, ID);
             create.Show();
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопки просмотра.
+        /// Создает новый экземляр AdminList нужного типа.
+        /// </summary>
         private void Button_List(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -41,6 +59,10 @@ namespace LibraryManager
             AdminList list = new AdminList(type);
             list.Show();
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопку удаления аренды.
+        /// Создает новый экземляр RentList нужного типа.
+        /// </summary>
         private void Remove_List(object sender, RoutedEventArgs e)
         {
             RentList remove = new RentList();

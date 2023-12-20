@@ -7,13 +7,25 @@ using System.Linq;
 using System;
 namespace LibraryManager
 {
+    /// <summary>
+    /// Тип выводимого списка ListBox.
+    /// </summary>
     public enum ListType
     {
         Autor, Publishing, Book, Librarian, Rent, Reader, None
     }
+    /// <summary>
+    /// Класс окна просмотра записей.
+    /// </summary>
     public partial class AdminList : Window
     {
+        /// Выбранный элемент ListBox.
         public string? SelectedItem { get; set; }
+        /// <summary>
+        /// Создание ListBox для выбора элемента.
+        /// </summary>
+        /// <param name="type">Тип выводимого листа.</param>
+        /// <param name="bookRent">true, если не требуется вывод арендованных книг.</param>
         public void CreateList(ListType type, bool bookRent = false)
         {
             ObjectList.Items.Clear();
@@ -87,6 +99,11 @@ namespace LibraryManager
             }
             }
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопку выбора.
+        /// При вызове сохраняет выбранный элемент как SelectedItem,
+        /// после закрывает текущее окно.
+        /// </summary>
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             if (ObjectList.SelectedItem != null) 
@@ -99,28 +116,11 @@ namespace LibraryManager
                 this.Close();
             }
         }
-        public class CustomItem : Grid
-        {
-            public CustomItem() : base() { }
-            public int ID;
-            public string[]? Parts;
-            public void Fill(string[] parts)
-            {
-                System.Int32.TryParse(parts[0], out ID);
-                Parts = parts;
-                for (int i = 0; i < parts.Length; i++)
-                {
-                    TextBlock textBox = new TextBlock { Text = parts[i] };
-                    Grid.SetColumn(textBox, i);
-                    Children.Add(textBox);
-                }
-            }
-            public override string? ToString()
-            {
-                if (Parts != null) return string.Join(", ", Parts);
-                else return "";
-            }
-        }
+        /// <summary>
+        /// Обработчик события нажатия на кнопку выбора типа листа.
+        /// При нажатии сменяет тип выводимого ListBox внутри текущего окна на другой тип,
+        /// а так же обновляет полный массив значений.
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -139,6 +139,10 @@ namespace LibraryManager
             full.Items.Clear();
             foreach (var item in ObjectList.Items) { full.Items.Add(item); }
         }
+        /// <summary>
+        /// Обработчик события изменения строки поиска.
+        /// При вызове выводит ListBox содержащий только содержимое FindBox.
+        /// </summary>
         private void FindBox_Changed(object sender, TextChangedEventArgs e)
         {   
             string filteredText = (findBox.Text == null) ? "" : findBox.Text;
@@ -149,14 +153,27 @@ namespace LibraryManager
                 ObjectList.Items.Add(item);
             }
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопку перезагрузки.
+        /// Вызывает CreateList() нужного типа и обновляет данные полного списка.
+        /// </summary>
         private void Reload_Click(object sender, RoutedEventArgs e)
         {
             CreateList(type);
             full.Items.Clear();
             foreach (var item in ObjectList.Items) { full.Items.Add(item); }
         }
+        /// Тип текущего выводимого листа в окне.
         ListType type;
+        /// Все значения нужного типа.
         ItemsControl full = new ItemsControl();
+        /// <summary>
+        /// Конструктор AdminList.
+        /// Инициализирует компоненты окна и устанавливает иконку list.png.
+        /// Инициализиует стартовый лист и сохраняет его.
+        /// </summary>
+        /// <param name="_type">Тип выводимого листа.</param>
+        /// <param name="bookRent">true, если требуется вывод неарендованных книг.</param>
         public AdminList(ListType _type, bool bookRent = false)
         { 
             InitializeComponent();

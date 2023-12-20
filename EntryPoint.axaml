@@ -7,7 +7,7 @@
         Width="300" Height="200">
 
     <StackPanel VerticalAlignment="Center"> 
-        <Button Content="AdminPanel" Width="200" Click="AdminPanel_Click" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
-        <Button Content="UserPanel" Width="200" Click="UserPanel_Click" Margin="0,20,0,0" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button Content="Администратор" Width="200" Click="AdminPanel_Click" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button Content="Пользователь" Width="200" Click="UserPanel_Click" Margin="0,20,0,0" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
     </StackPanel>
 </Window>

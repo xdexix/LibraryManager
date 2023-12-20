@@ -6,10 +6,51 @@ using System.Data.SQLite;
 using System.Linq;
 using System;
 namespace LibraryManager
-{
+{       
+    /// <summary>
+    /// Класс таблицы для добавления в ListBox.
+    /// </summary>
+    public class CustomItem : Grid
+    {
+        /// <summary>
+        /// Конструктор таблицы, наследование от Avalonia.Grid.
+        /// </summary>
+        public CustomItem() : base() { }
+        /// ID выводимого поля.
+        public int ID; 
+        /// Все части выводимой таблицы.
+        public string[]? Parts; 
+        /// <summary>
+        /// Генерация таблицы.
+        /// </summary>
+        public void Fill(string[] parts)
+        {
+            System.Int32.TryParse(parts[0], out ID);
+            Parts = parts;
+            for (int i = 0; i < parts.Length; i++)
+            {
+                TextBlock textBox = new TextBlock { Text = parts[i] };
+                Grid.SetColumn(textBox, i);
+                Children.Add(textBox);
+            }
+        }
+        /// <summary>
+        /// Содержимое Parts.
+        /// </summary>
+        public override string? ToString()
+        {
+            if (Parts != null) return string.Join(", ", Parts);
+            else return "";
+        }
+    }
+    /// <summary>
+    /// Класс окна удаления аренды.
+    /// </summary>
     public partial class RentList : Window
     {
-        public string? SelectedItem { get; set; }
+        /// <summary>
+        /// Создание ListBox для выбора элемента.
+        /// </summary>
         public void CreateRemoveList()
         {
             ObjectList.Items.Clear();
@@ -49,6 +90,11 @@ namespace LibraryManager
             connection.Close();
             }
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопку удаления.
+        /// При вызове удаляет выбранный элемент аренды из базы данных,
+        /// после меняет статус арендованной книги.
+        /// </summary>
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             if (ObjectList.SelectedItem != null) 
@@ -79,28 +125,11 @@ namespace LibraryManager
                 this.Close();
             }
         }
-        public class CustomItem : Grid
-        {
-            public CustomItem() : base() { }
-            public int ID;
-            public string[]? Parts;
-            public void Fill(string[] parts)
-            {
-                System.Int32.TryParse(parts[0], out ID);
-                Parts = parts;
-                for (int i = 0; i < parts.Length; i++)
-                {
-                    TextBlock textBox = new TextBlock { Text = parts[i] };
-                    Grid.SetColumn(textBox, i);
-                    Children.Add(textBox);
-                }
-            }
-            public override string? ToString()
-            {
-                if (Parts != null) return string.Join(", ", Parts);
-                else return "";
-            }
-        }
+
+        /// <summary>
+        /// Обработчик события изменения строки поиска.
+        /// При вызове выводит ListBox содержащий только содержимое FindBox.
+        /// </summary>
         private void FindBox_Changed(object sender, TextChangedEventArgs e)
         {   
             string filteredText = (findBox.Text == null) ? "" : findBox.Text;
@@ -111,7 +140,13 @@ namespace LibraryManager
                 ObjectList.Items.Add(item);
             }
         }
+        /// Все значения нужного типа.
         ItemsControl full = new ItemsControl();
+        /// <summary>
+        /// Конструктор RentList.
+        /// Инициализирует компоненты окна и устанавливает иконку delete.png.
+        /// Инициализиует стартовый лист и сохраняет его.
+        /// </summary>
         public RentList()
         { 
             InitializeComponent();

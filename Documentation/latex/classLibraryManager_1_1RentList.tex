@@ -1,0 +1,45 @@
+\doxysection{Library\+Manager.\+Rent\+List Class Reference}
+\hypertarget{classLibraryManager_1_1RentList}{}\label{classLibraryManager_1_1RentList}\index{LibraryManager.RentList@{LibraryManager.RentList}}
+
+
+Класс окна удаления аренды.  
+
+
+Inheritance diagram for Library\+Manager.\+Rent\+List\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLibraryManager_1_1RentList}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classLibraryManager_1_1RentList_a9603962f5d1082d764ab1803a254d53d}\label{classLibraryManager_1_1RentList_a9603962f5d1082d764ab1803a254d53d} 
+void {\bfseries Create\+Remove\+List} ()
+\begin{DoxyCompactList}\small\item\em Создание List\+Box для выбора элемента. \end{DoxyCompactList}\item 
+\Hypertarget{classLibraryManager_1_1RentList_a7e6fcef8af1398546bc41ece1b11d11c}\label{classLibraryManager_1_1RentList_a7e6fcef8af1398546bc41ece1b11d11c} 
+{\bfseries Rent\+List} ()
+\begin{DoxyCompactList}\small\item\em Конструктор Rent\+List. Инициализирует компоненты окна и устанавливает иконку delete.\+png. Инициализиует стартовый лист и сохраняет его. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classLibraryManager_1_1RentList_aea7b9f85c530921a0c2033621d61a74d}\label{classLibraryManager_1_1RentList_aea7b9f85c530921a0c2033621d61a74d} 
+void {\bfseries Remove\+Button\+\_\+\+Click} (object sender, Routed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Обработчик события нажатия на кнопку удаления. При вызове удаляет выбранный элемент аренды из базы данных, после меняет статус арендованной книги. \end{DoxyCompactList}\item 
+\Hypertarget{classLibraryManager_1_1RentList_a8217a2ae5e7a4fb254a155f1e1c5c1c8}\label{classLibraryManager_1_1RentList_a8217a2ae5e7a4fb254a155f1e1c5c1c8} 
+void {\bfseries Find\+Box\+\_\+\+Changed} (object sender, Text\+Changed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Обработчик события изменения строки поиска. При вызове выводит List\+Box содержащий только содержимое Find\+Box. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classLibraryManager_1_1RentList_a6d2638079e3ec69f331df261a5fe8808}\label{classLibraryManager_1_1RentList_a6d2638079e3ec69f331df261a5fe8808} 
+Items\+Control {\bfseries full} = new Items\+Control()
+\begin{DoxyCompactList}\small\item\em Все значения нужного типа. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс окна удаления аренды. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+User/User\+Rent\+End.\+axaml.\+cs\end{DoxyCompactItemize}

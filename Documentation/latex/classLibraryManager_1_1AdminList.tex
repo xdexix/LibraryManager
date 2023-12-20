@@ -1,0 +1,98 @@
+\doxysection{Library\+Manager.\+Admin\+List Class Reference}
+\hypertarget{classLibraryManager_1_1AdminList}{}\label{classLibraryManager_1_1AdminList}\index{LibraryManager.AdminList@{LibraryManager.AdminList}}
+
+
+Класс окна просмотра записей.  
+
+
+Inheritance diagram for Library\+Manager.\+Admin\+List\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classLibraryManager_1_1AdminList}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classLibraryManager_1_1AdminList_aae66c99c190d57c1c0b431a88e8e1add}{Create\+List}} (\mbox{\hyperlink{namespaceLibraryManager_a3db68b5528c30eedd4aa639809ff4942}{List\+Type}} \mbox{\hyperlink{classLibraryManager_1_1AdminList_ad642234696f6208c4ac67cda42ea16ea}{type}}, bool book\+Rent=false)
+\begin{DoxyCompactList}\small\item\em Создание List\+Box для выбора элемента. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classLibraryManager_1_1AdminList_a1fa13a9581a130eaab5f4eb4a02d16ce}{Admin\+List}} (\mbox{\hyperlink{namespaceLibraryManager_a3db68b5528c30eedd4aa639809ff4942}{List\+Type}} \+\_\+type, bool book\+Rent=false)
+\begin{DoxyCompactList}\small\item\em Конструктор Admin\+List. Инициализирует компоненты окна и устанавливает иконку list.\+png. Инициализиует стартовый лист и сохраняет его. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classLibraryManager_1_1AdminList_a8e090bf04a0a7f7a83259710c4750752}\label{classLibraryManager_1_1AdminList_a8e090bf04a0a7f7a83259710c4750752} 
+string? {\bfseries Selected\+Item}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Выбранный элемент List\+Box. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classLibraryManager_1_1AdminList_a444629a0418779e9e0f06317f31b912b}\label{classLibraryManager_1_1AdminList_a444629a0418779e9e0f06317f31b912b} 
+void {\bfseries Select\+Button\+\_\+\+Click} (object sender, Routed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Обработчик события нажатия на кнопку выбора. При вызове сохраняет выбранный элемент как Selected\+Item, после закрывает текущее окно. \end{DoxyCompactList}\item 
+\Hypertarget{classLibraryManager_1_1AdminList_a32227032afcaab4df6f40866d7d047cd}\label{classLibraryManager_1_1AdminList_a32227032afcaab4df6f40866d7d047cd} 
+void {\bfseries Button\+\_\+\+Click} (object sender, Routed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Обработчик события нажатия на кнопку выбора типа листа. При нажатии сменяет тип выводимого List\+Box внутри текущего окна на другой тип, а так же обновляет полный массив значений. \end{DoxyCompactList}\item 
+\Hypertarget{classLibraryManager_1_1AdminList_a244828f3a20fb7ac687d71d35739311e}\label{classLibraryManager_1_1AdminList_a244828f3a20fb7ac687d71d35739311e} 
+void {\bfseries Find\+Box\+\_\+\+Changed} (object sender, Text\+Changed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Обработчик события изменения строки поиска. При вызове выводит List\+Box содержащий только содержимое Find\+Box. \end{DoxyCompactList}\item 
+\Hypertarget{classLibraryManager_1_1AdminList_ad4ebad696b421a98dad4ca4454a5e47a}\label{classLibraryManager_1_1AdminList_ad4ebad696b421a98dad4ca4454a5e47a} 
+void {\bfseries Reload\+\_\+\+Click} (object sender, Routed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Обработчик события нажатия на кнопку перезагрузки. Вызывает Create\+List() нужного типа и обновляет данные полного списка. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classLibraryManager_1_1AdminList_ad642234696f6208c4ac67cda42ea16ea}\label{classLibraryManager_1_1AdminList_ad642234696f6208c4ac67cda42ea16ea} 
+\mbox{\hyperlink{namespaceLibraryManager_a3db68b5528c30eedd4aa639809ff4942}{List\+Type}} {\bfseries type}
+\begin{DoxyCompactList}\small\item\em Тип текущего выводимого листа в окне. \end{DoxyCompactList}\item 
+\Hypertarget{classLibraryManager_1_1AdminList_af37f1e4399a140145cfbc03e884f6dc1}\label{classLibraryManager_1_1AdminList_af37f1e4399a140145cfbc03e884f6dc1} 
+Items\+Control {\bfseries full} = new Items\+Control()
+\begin{DoxyCompactList}\small\item\em Все значения нужного типа. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс окна просмотра записей. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLibraryManager_1_1AdminList_a1fa13a9581a130eaab5f4eb4a02d16ce}\label{classLibraryManager_1_1AdminList_a1fa13a9581a130eaab5f4eb4a02d16ce} 
+\index{LibraryManager.AdminList@{LibraryManager.AdminList}!AdminList@{AdminList}}
+\index{AdminList@{AdminList}!LibraryManager.AdminList@{LibraryManager.AdminList}}
+\doxysubsubsection{\texorpdfstring{AdminList()}{AdminList()}}
+{\footnotesize\ttfamily Library\+Manager.\+Admin\+List.\+Admin\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceLibraryManager_a3db68b5528c30eedd4aa639809ff4942}{List\+Type}}}]{\+\_\+type,  }\item[{bool}]{book\+Rent = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Конструктор Admin\+List. Инициализирует компоненты окна и устанавливает иконку list.\+png. Инициализиует стартовый лист и сохраняет его. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+type} & Тип выводимого листа.\\
+\hline
+{\em book\+Rent} & true, если требуется вывод неарендованных книг.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLibraryManager_1_1AdminList_aae66c99c190d57c1c0b431a88e8e1add}\label{classLibraryManager_1_1AdminList_aae66c99c190d57c1c0b431a88e8e1add} 
+\index{LibraryManager.AdminList@{LibraryManager.AdminList}!CreateList@{CreateList}}
+\index{CreateList@{CreateList}!LibraryManager.AdminList@{LibraryManager.AdminList}}
+\doxysubsubsection{\texorpdfstring{CreateList()}{CreateList()}}
+{\footnotesize\ttfamily void Library\+Manager.\+Admin\+List.\+Create\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceLibraryManager_a3db68b5528c30eedd4aa639809ff4942}{List\+Type}}}]{type,  }\item[{bool}]{book\+Rent = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Создание List\+Box для выбора элемента. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Тип выводимого листа.\\
+\hline
+{\em book\+Rent} & true, если не требуется вывод арендованных книг.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Admin/Admin\+List.\+axaml.\+cs\end{DoxyCompactItemize}

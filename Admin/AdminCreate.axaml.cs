@@ -10,14 +10,24 @@ using Tmds.DBus.Protocol;
 
 namespace LibraryManager
 {
+    /// <summary>
+    /// Тип создаваемого элемента.
+    /// </summary>
     public enum Create
     {
         Autor, Publishing, Book, Librarian, Reader, Rent
     }
-
+    /// <summary>
+    /// Класс окна создания записей.
+    /// </summary>
     public partial class AdminCreate : Window
     {    
+        /// ID библиотекаря.
         private int ID;
+        /// <summary>
+        /// Создание TextBox поля для ввода значений создаваемого элемента.
+        /// </summary>
+        /// <param name="nameField">Строка названия</param>
         public void CreateField(string nameField)
         {
             var stackPanel = this.FindControl<StackPanel>("MyStackPanel");
@@ -37,6 +47,11 @@ namespace LibraryManager
 
             textBoxes.Add(textBox);
         }
+        /// <summary>
+        /// Создание кнопки для вывода листа для выбора значений создаваемого элемента.
+        /// </summary>
+        /// <param name="nameField">Строка названия</param>
+        /// <param name="rent">true, если не требуется вывод арендованных книг.</param>
         public void CreateField(ListType NameField, bool rent = false)
         {
             var stackPanel = this.FindControl<StackPanel>("MyStackPanel");
@@ -68,15 +83,32 @@ namespace LibraryManager
 
             buttons.Add(button);
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопку выбора внутри листа.
+        /// Сохраняет выбранный элемент для дальнейшего сохранения.
+        /// </summary>
+        /// <param name="type">Тип выводимого листа AdminList.</param>
+        /// <param name="bookRent">true, если не требуется вывод арендованных книг.</param>
         private void ButtonList_Click(Button sender, RoutedEventArgs e, ListType type, bool bookRent = false)
         {
             AdminList adminList = new AdminList(type, bookRent);
             adminList.Closed += (s, args) => { sender.Content = adminList.SelectedItem; };
             adminList.Show();
         }
+        /// Тип текущего создаваемого листа в окне.
         Create type;
+        /// Лист содержащий значения вводимых в TextBox значений CreateField().
         private List<TextBox> textBoxes = new List<TextBox>();
+        /// Лист содержащий элементы выбранные в ListBox CreateField().
         private List<Button> buttons = new List<Button>();
+        /// <summary>
+        /// Конструктор AdminCreate.
+        /// Инициализирует компоненты окна и устанавливает иконку plus.png.
+        /// Создание полей для ввода значений элементов для сохранения.
+        /// </summary>
+        /// <param name="create">Тип создаваемого элемента.</param>
+        /// <param name="rent">true, если не требуется вывод арендованных книг.</param>
+        /// <param name="id">ID библиотекаря.</param>
         public AdminCreate(Create create, bool rent = false, int id = 0)
         { 
             InitializeComponent();
@@ -146,6 +178,10 @@ namespace LibraryManager
 
             stackPanel?.Children.Add(button);
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопку сохранения.
+        /// При нажатии вызывает необходимую функцию записи в базу данных.
+        /// </summary>
         private void Button_Click(object? sender, RoutedEventArgs e)
         {
             using (var connection = new SQLiteConnection("Data Source=Data/DataBase.db")) 
@@ -175,6 +211,10 @@ namespace LibraryManager
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Сохранение автора в базу данных.
+        /// </summary>
+        /// <param name="connection">Путь к базе данных SQLite.</param>
         private void SaveAutor(SQLiteConnection connection)
         {
             var autor = new 
@@ -201,6 +241,10 @@ namespace LibraryManager
             command.ExecuteNonQuery();
             this.Close();
         }
+        /// <summary>
+        /// Сохранение издательства в базу данных.
+        /// </summary>
+        /// <param name="connection">Путь к базе данных SQLite.</param>
         private void SavePublishing(SQLiteConnection connection)
         {
             var publishing = new 
@@ -227,6 +271,10 @@ namespace LibraryManager
             command.ExecuteNonQuery();
             this.Close();
         }
+        /// <summary>
+        /// Сохранение библиотекаря в базу данных.
+        /// </summary>
+        /// <param name="connection">Путь к базе данных SQLite.</param>
         private void SaveLibrarian(SQLiteConnection connection)
         {
             var librarian = new 
@@ -251,6 +299,10 @@ namespace LibraryManager
             command.ExecuteNonQuery();
             this.Close();
         }
+        /// <summary>
+        /// Сохранение книги в базу данных.
+        /// </summary>
+        /// <param name="connection">Путь к базе данных SQLite.</param>
         private void SaveBook(SQLiteConnection connection)
         {
             int parsedValue1;
@@ -285,6 +337,10 @@ namespace LibraryManager
             command.ExecuteNonQuery();
             this.Close();
         }
+        /// <summary>
+        /// Сохранение читателя в базу данных.
+        /// </summary>
+        /// <param name="connection">Путь к базе данных SQLite.</param>
         private void SaveReader(SQLiteConnection connection)
         {
             var reader = new 
@@ -314,6 +370,10 @@ namespace LibraryManager
             command.ExecuteNonQuery();
             this.Close();
         }
+        /// <summary>
+        /// Сохранение аренды в базу данных.
+        /// </summary>
+        /// <param name="connection">Путь к базе данных SQLite.</param>
         private void SaveRent(SQLiteConnection connection)
         {
             int parsedValue1; int parsedValue2;

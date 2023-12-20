@@ -3,14 +3,26 @@ using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 namespace LibraryManager
 {
+    /// <summary>
+    /// Класс окна интерфейса для администратора.
+    /// </summary>
     public partial class AdminWindow : Window
     {
+        /// <summary>
+        /// Конструктор AdminWindow.
+        /// Инициализирует компоненты окна и устанавливает иконку icon.png.
+        /// </summary>
         public AdminWindow()
         { 
             InitializeComponent();
             Bitmap bitmap = new Bitmap("Images/icon.png");
             this.Icon = new WindowIcon(bitmap);
         }
+        /// <summary>
+        /// Обработчик события нажатия на кнопки действия.
+        /// Создание Автора, Издательства, книги или библиотекаря, создание AdminCreate() соответствующего типа.
+        /// Вывод AdminList(ListType.None), с выбором типа внутри AdminList.
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
