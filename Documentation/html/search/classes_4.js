@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rentlist_0',['RentList',['../classLibraryManager_1_1RentList.html',1,'LibraryManager']]]
+  ['librarian_0',['Librarian',['../classLibrarian.html',1,'']]]
 ];

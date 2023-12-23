@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entrypoint_0',['EntryPoint',['../classLibraryManager_1_1EntryPoint.html',1,'LibraryManager']]]
+  ['customitem_0',['CustomItem',['../classLibraryManager_1_1CustomItem.html',1,'LibraryManager']]]
 ];

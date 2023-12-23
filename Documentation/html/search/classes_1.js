@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['customitem_0',['CustomItem',['../classLibraryManager_1_1CustomItem.html',1,'LibraryManager']]]
+  ['bdtypes_0',['BDTypes',['../classBDTypes.html',1,'']]],
+  ['book_1',['Book',['../classBook.html',1,'']]]
 ];

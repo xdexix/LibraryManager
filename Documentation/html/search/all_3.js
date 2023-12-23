@@ -6,5 +6,6 @@ var searchData=
   ['adminpanel_5fclick_3',['AdminPanel_Click',['../classLibraryManager_1_1EntryPoint.html#aad4b8c0a520191a7d45d3a09706df27c',1,'LibraryManager::EntryPoint']]],
   ['adminpassword_5fclick_4',['AdminPassword_Click',['../classLibraryManager_1_1AdminPanel.html#aa3cd522366957c5317c69e249804dc75',1,'LibraryManager::AdminPanel']]],
   ['adminwindow_5',['AdminWindow',['../classLibraryManager_1_1AdminWindow.html',1,'LibraryManager.AdminWindow'],['../classLibraryManager_1_1AdminWindow.html#a3b8889f93d748275093399dd6c99290e',1,'LibraryManager.AdminWindow.AdminWindow()']]],
-  ['app_6',['App',['../classLibraryManager_1_1App.html',1,'LibraryManager']]]
+  ['app_6',['App',['../classLibraryManager_1_1App.html',1,'LibraryManager']]],
+  ['autor_7',['Autor',['../classAutor.html',1,'']]]
 ];

@@ -2,45 +2,43 @@ using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
-namespace LibraryManager
+namespace LibraryManager;
+/// <summary>
+/// Класс авторизации администратора.
+/// </summary>
+public partial class AdminPanel : Window
 {
+    /// Пароль администратора.
+    private const string Password = "admin";
     /// <summary>
-    /// Класс авторизации администратора.
+    /// Конструктор AdminPanel.
+    /// Инициализирует компоненты окна и устанавливает иконку icon.png.
+    /// Устанавливает фокус на поле для ввода ID.
     /// </summary>
-    public partial class AdminPanel : Window
+    public AdminPanel()
+    { 
+        InitializeComponent();
+        string imagePath = Path.Combine("Images", "icon.png");
+        Bitmap bitmap = new Bitmap(imagePath);
+        this.Icon = new WindowIcon(bitmap);
+        passwordBox.Focus();
+    }
+    /// <summary>
+    /// Обработчик события нажатия на кнопку продолжения.
+    /// Создает новый экземляр AdminWindow(). Производит проверку корректности пароля.
+    /// </summary>
+    private void AdminPassword_Click(object sender, RoutedEventArgs e)
     {
-        /// Пароль администратора.
-        private const string Password = "admin";
-        /// <summary>
-        /// Конструктор AdminPanel.
-        /// Инициализирует компоненты окна и устанавливает иконку icon.png.
-        /// Устанавливает фокус на поле для ввода ID.
-        /// </summary>
-        public AdminPanel()
-        { 
-            InitializeComponent();
-            string imagePath = Path.Combine("Images", "icon.png");
-            Bitmap bitmap = new Bitmap(imagePath);
-            this.Icon = new WindowIcon(bitmap);
-            passwordBox.Focus();
-        }
-        /// <summary>
-        /// Обработчик события нажатия на кнопку продолжения.
-        /// Создает новый экземляр AdminWindow(). Производит проверку корректности пароля.
-        /// </summary>
-        private void AdminPassword_Click(object sender, RoutedEventArgs e)
+        if (passwordBox.Text == Password)
         {
-            if (passwordBox.Text == Password)
-            {
-                var adminWindow = new AdminWindow();
-                adminWindow.Show();
-                this.Close();
-            }
-            else
-            {
-                passwordBox.Text = "";
-                passwordBox.Focus();
-            }
+            var adminWindow = new AdminWindow();
+            adminWindow.Show();
+            this.Close();
+        }
+        else
+        {
+            passwordBox.Text = "";
+            passwordBox.Focus();
         }
     }
 }
