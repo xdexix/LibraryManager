@@ -22,6 +22,26 @@ public class BDTypes
             (new ColumnDefinition { Width = new GridLength(width-'0', GridUnitType.Star) });
         return grid;
     }
+    /// <summary>
+    /// Проверка введенных данных для создания записей в базе данных.
+    /// </summary>
+    public bool IsValid(object[]? parameters)
+    {
+        if (parameters == null) { return false; }
+
+        for (int i = 0; i < parameters?.Length; i++)
+        {
+            if (parameters[i] is int)
+            {
+                if ((int)parameters[i] < 0) { return false; }
+            }
+            else if (parameters[i] is string)
+            {
+                if (string.IsNullOrEmpty(parameters[i] as string)) { return false; }
+            }
+        }
+        return true;
+    }
 }
 /// <summary>
 /// Класс объектов Автор. Наследование от базового типа DBTypes.
@@ -33,12 +53,42 @@ public class Autor : BDTypes
     private string? Country { get; set; }
     private string? Birth { get; set; }
     /// <summary>
-    /// Загрузк данных из базы данных.
+    /// Пустой автор.
+    /// </summary>
+    public Autor() {Name = ""; Surname = ""; Country = ""; Birth= ""; }
+    /// <summary>
+    /// Сохранение Автора в базу данных.
+    /// </summary>
+    /// <param name="connection">Путь к базе данных.</param>
+    /// <param name="_name">Имя автора.</param>
+    /// <param name="_surname">Фамилия автора.</param>
+    /// <param name="_country">Страна автора.</param>
+    /// <param name="_birth">Год рождения автора.</param>
+    public Autor(SQLiteConnection connection, string? _name, string? _surname, string? _country, string? _birth)
+    {
+        this.Name = _name;
+        this.Surname = _surname;
+        this.Country = _country;
+        this.Birth = _birth;
+
+        if (!IsValid(new object[] {Name ?? "", Surname ?? "", Country ?? "", Birth ?? "" })) { return; }
+
+        string sql = "INSERT INTO AUTOR (Name, Surname, Country, Birth) VALUES (@Name, @Surname, @Country, @Birth)";
+        SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+        command.Parameters.AddWithValue("@Name", Name);
+        command.Parameters.AddWithValue("@Surname", Surname);
+        command.Parameters.AddWithValue("@Country", Country);
+        command.Parameters.AddWithValue("@Birth", Birth);
+
+        command.ExecuteNonQuery();
+    }
+    /// <summary>
+    /// Загрузка данных из базы данных.
     /// </summary>
     /// <param name="id">ID загружаемого элемента.</param>
     /// <param name="connection">Путь к базе данных.</param>
-    /// <param name="parameters">Дополнительные параметры.</param>
-    public bool LoadFromBase(int id, SQLiteConnection connection, List<string>? parameters = null) 
+    public bool LoadFromBase(int id, SQLiteConnection connection) 
     {
         string com = "SELECT * FROM AUTOR WHERE ID = @ID";
         using (connection)
@@ -47,14 +97,6 @@ public class Autor : BDTypes
             using (SQLiteCommand command = new SQLiteCommand(com, connection))
             {
                 command.Parameters.AddWithValue("@ID", id);
-                if (parameters != null)
-                {
-                    foreach (string parameter in parameters)
-                    {
-                        string[] param = parameter.Split('=');
-                        command.Parameters.AddWithValue(param[0], param[1]);
-                    }
-                }
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -72,6 +114,9 @@ public class Autor : BDTypes
             }
         }
     }
+    /// <summary>
+    /// Преобразование в GustomItem : AvaloniaGrid для отображения в ListBox.
+    /// </summary>
     public CustomItem ToListBoxItem()
     {
         CustomItem grid = CreateGrid("12231");
@@ -98,12 +143,37 @@ public class Publishing : BDTypes
     private string? Country { get; set; }
     private string? Adress { get; set; }
     /// <summary>
-    /// Загрузк данных из базы данных.
+    /// Пустое издательство.
+    /// </summary>
+    public Publishing() { Title = ""; Town= ""; Country = ""; Adress = ""; }
+    /// <summary>
+    /// Сохранение Издательства в базу данных.
+    /// </summary>
+    /// <param name="connection">Путь к базе данных.</param>
+    /// <param name="_title">Название издательства.</param>
+    /// <param name="_town">Город издательства.</param>
+    /// <param name="_country">Страна издательства.</param>
+    /// <param name="_adress">Адрес издательства.</param>
+    public Publishing(SQLiteConnection connection, string? _title, string? _town, string? _country, string? _adress)
+    {
+        if (!IsValid(new object[] {_title ?? "", _town ?? "", _country ?? "", _adress ?? ""})) { return; }
+
+        string sql = "INSERT INTO PUBLISHING (Title, Town, Country, Adress) VALUES (@Title, @Town, @Country, @Adress)";
+        SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+        command.Parameters.AddWithValue("@Title", _title);
+        command.Parameters.AddWithValue("@Town", _town);
+        command.Parameters.AddWithValue("@Country", _country);
+        command.Parameters.AddWithValue("@Adress", _adress);
+
+        command.ExecuteNonQuery();
+    }
+    /// <summary>
+    /// Загрузка данных из базы данных.
     /// </summary>
     /// <param name="id">ID загружаемого элемента.</param>
     /// <param name="connection">Путь к базе данных.</param>
-    /// <param name="parameters">Дополнительные параметры.</param>
-    public bool LoadFromBase(int id, SQLiteConnection connection, List<string>? parameters = null) 
+    public bool LoadFromBase(int id, SQLiteConnection connection) 
     {
         string com = "SELECT * FROM PUBLISHING WHERE ID = @ID";
         using (connection)
@@ -112,14 +182,6 @@ public class Publishing : BDTypes
             using (SQLiteCommand command = new SQLiteCommand(com, connection))
             {
                 command.Parameters.AddWithValue("@ID", id);
-                if (parameters != null)
-                {
-                    foreach (string parameter in parameters)
-                    {
-                        string[] param = parameter.Split('=');
-                        command.Parameters.AddWithValue(param[0], param[1]);
-                    }
-                }
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -137,6 +199,9 @@ public class Publishing : BDTypes
             }
         }
     }
+    /// <summary>
+    /// Преобразование в GustomItem : AvaloniaGrid для отображения в ListBox.
+    /// </summary>
     public CustomItem ToListBoxItem()
     {
         CustomItem grid = CreateGrid("12224");
@@ -163,7 +228,40 @@ public class Reader : BDTypes
     private string? Email { get; set; }
     private string? Phone { get; set; }
     private string? Adress { get; set; }
-    public bool LoadFromBase(int id, SQLiteConnection connection, List<string>? parameters = null) 
+    /// <summary>
+    /// Пустой читатель.
+    /// </summary>
+    public Reader() { Name = ""; Surname= ""; Email = ""; Phone = ""; Adress = ""; }
+    /// <summary>
+    /// Сохранение Читателя в базу данных.
+    /// </summary>
+    /// <param name="connection">Путь к базе данных.</param>
+    /// <param name="_name">Имя читателя.</param>
+    /// <param name="_surname">Фамилия читателя.</param>
+    /// <param name="_email">Email читателя.</param>
+    /// <param name="_phone">Телефон читателя.</param>
+    /// <param name="_adress">Адрес читателя.</param>
+    public Reader(SQLiteConnection connection, string? _name, string? _surname, string? _email, string? _phone, string? _adress)
+    {
+        if (!IsValid(new object[] {_name ?? "", _surname ?? "", _email?? "", _phone ?? "", _adress ?? ""})) { return; }
+
+        string sql = "INSERT INTO READER (Name, Surname, Email, Phone, Adress) VALUES (@Name, @Surname, @Email, @Phone, @Adress)";
+        SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+        command.Parameters.AddWithValue("@Name", _name);
+        command.Parameters.AddWithValue("@Surname", _surname);
+        command.Parameters.AddWithValue("@Email", _email);
+        command.Parameters.AddWithValue("@Phone", _phone);
+        command.Parameters.AddWithValue("@Adress", _adress);
+
+        command.ExecuteNonQuery();
+    }
+    /// <summary>
+    /// Загрузка данных из базы данных.
+    /// </summary>
+    /// <param name="id">ID загружаемого элемента.</param>
+    /// <param name="connection">Путь к базе данных.</param>
+    public bool LoadFromBase(int id, SQLiteConnection connection) 
     {
         string com = "SELECT * FROM READER WHERE ID = @ID";
         using (connection)
@@ -172,14 +270,6 @@ public class Reader : BDTypes
             using (SQLiteCommand command = new SQLiteCommand(com, connection))
             {
                 command.Parameters.AddWithValue("@ID", id);
-                if (parameters != null)
-                {
-                    foreach (string parameter in parameters)
-                    {
-                        string[] param = parameter.Split('=');
-                        command.Parameters.AddWithValue(param[0], param[1]);
-                    }
-                }
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -198,6 +288,9 @@ public class Reader : BDTypes
             }
         }
     }
+    /// <summary>
+    /// Преобразование в GustomItem : AvaloniaGrid для отображения в ListBox.
+    /// </summary>
     public CustomItem ToListBoxItem()
     { 
         CustomItem grid = CreateGrid("122224");
@@ -222,7 +315,36 @@ public class Librarian : BDTypes
     private string? Name { get; set; }
     private string? Surname { get; set; }
     private string? POST { get; set; }
-    public bool LoadFromBase(int id, SQLiteConnection connection, List<string>? parameters = null) 
+    /// <summary>
+    /// Пустой библиотекарь.
+    /// </summary>
+    public Librarian() { Name = ""; Surname= ""; POST = ""; }
+    /// <summary>
+    /// Сохранение Библиотекаря в базу данных.
+    /// </summary>
+    /// <param name="connection">Путь к базе данных.</param>
+    /// <param name="_name">Имя библиотекаря.</param>
+    /// <param name="_surname">Фамилия библиотекаря.</param>
+    /// <param name="_post">Индекс библиотекаря.</param>
+    public Librarian(SQLiteConnection connection, string? _name, string? _surname, string? _post)
+    {
+        if (!IsValid(new object[] {_name ?? "", _surname ?? "", _post ?? ""})) { return; }
+
+        string sql = "INSERT INTO LIBRARIAN (Name, Surname, POST) VALUES (@Name, @Surname, @POST)";
+        SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+        command.Parameters.AddWithValue("@Name", _name);
+        command.Parameters.AddWithValue("@Surname", _surname);
+        command.Parameters.AddWithValue("@POST", _post);
+
+        command.ExecuteNonQuery();
+    }
+    /// <summary>
+    /// Загрузка данных из базы данных.
+    /// </summary>
+    /// <param name="id">ID загружаемого элемента.</param>
+    /// <param name="connection">Путь к базе данных.</param>
+    public bool LoadFromBase(int id, SQLiteConnection connection) 
     { 
         string com = "SELECT * FROM LIBRARIAN WHERE ID = @ID";
         using (connection)
@@ -231,14 +353,6 @@ public class Librarian : BDTypes
             using (SQLiteCommand command = new SQLiteCommand(com, connection))
             {
                 command.Parameters.AddWithValue("@ID", id);
-                if (parameters != null)
-                {
-                    foreach (string parameter in parameters)
-                    {
-                        string[] param = parameter.Split('=');
-                        command.Parameters.AddWithValue(param[0], param[1]);
-                    }
-                }
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -255,6 +369,9 @@ public class Librarian : BDTypes
             }
         }
     }
+    /// <summary>
+    /// Преобразование в GustomItem : AvaloniaGrid для отображения в ListBox.
+    /// </summary>
     public CustomItem ToListBoxItem()
     {
         CustomItem grid = CreateGrid("1332");
@@ -281,7 +398,40 @@ public class Rent : BDTypes
     private int Status { get; set; }
     private string? Start_t { get; set; }
     private string? End_t { get; set; }
-    public bool LoadFromBase(int id, SQLiteConnection connection, List<string>? parameters = null) 
+    /// <summary>
+    /// Пустая аренда.
+    /// </summary>
+    public Rent() { Reader = 0; Librarian = 0; Status = 0; Start_t = ""; End_t = ""; }
+    /// <summary>
+    /// Сохранение записи аренды в базу данных.
+    /// </summary>
+    /// <param name="connection">Путь к базе данных.</param>
+    /// <param name="_reader">ID читателя.</param>
+    /// <param name="_librarian">ID библиотекаря.</param>
+    /// <param name="_status">Статус аренды.</param>
+    /// <param name="_start_t">Время начала аренды.</param>
+    /// <param name="_end_t">Время окончания аренды.</param>
+    public Rent(SQLiteConnection connection, int _reader, int _librarian, int _status, string? _start_t, string? _end_t)
+    {
+        if (!IsValid(new object[] {_reader, _librarian, _status, _start_t ?? "", _end_t ?? ""})) { return; }
+
+        string sql = "INSERT INTO RENT (Reader, Librarian, Status, Start_t, End_t) VALUES (@Reader, @Librarian, @Status, @Start_t, @End_t)";
+        SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+        command.Parameters.AddWithValue("@Reader", _reader);
+        command.Parameters.AddWithValue("@Librarian", _librarian);
+        command.Parameters.AddWithValue("@Status", _status);
+        command.Parameters.AddWithValue("@Start_t", _start_t);
+        command.Parameters.AddWithValue("@End_t", _end_t);
+
+        command.ExecuteNonQuery();
+    }
+    /// <summary>
+    /// Загрузка данных из базы данных.
+    /// </summary>
+    /// <param name="id">ID загружаемого элемента.</param>
+    /// <param name="connection">Путь к базе данных.</param>
+    public bool LoadFromBase(int id, SQLiteConnection connection) 
     { 
         string com = "SELECT * FROM RENT WHERE ID = @ID";
         using (connection)
@@ -290,14 +440,6 @@ public class Rent : BDTypes
             using (SQLiteCommand command = new SQLiteCommand(com, connection))
             {
                 command.Parameters.AddWithValue("@ID", id);
-                if (parameters != null)
-                {
-                    foreach (string parameter in parameters)
-                    {
-                        string[] param = parameter.Split('=');
-                        command.Parameters.AddWithValue(param[0], param[1]);
-                    }
-                }
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -316,6 +458,9 @@ public class Rent : BDTypes
             }
         }
     }
+    /// <summary>
+    /// Преобразование в GustomItem : AvaloniaGrid для отображения в ListBox.
+    /// </summary>
     public CustomItem ToListBoxItem()
     {
         CustomItem grid = CreateGrid("111222");
@@ -343,8 +488,48 @@ public class Book : BDTypes
     private int Rent { get; set; }
     private string? Title { get; set; }
     private string? Publish { get; set; }
-    private string? Genre { get; set; }
-    public bool LoadFromBase(int id, SQLiteConnection connection, List<string>? parameters = null) 
+    private string? Genre { get; set; } 
+    /// <summary>
+    /// Если ID = 0, возвращает true.
+    /// </summary>
+    public bool Is0ID() { if (this.ID == 0) return false; else return true; }
+    /// <summary>
+    /// Пустая книга.
+    /// </summary>
+    public Book() { Autor = 0; Publishing = 0; Rent = 0; Title = ""; Publish = ""; Genre = ""; }
+    /// <summary>
+    /// Сохранение книги в базу данных.
+    /// </summary>
+    /// <param name="connection">Путь к базе данных.</param>
+    /// <param name="_autor">ID автора.</param>
+    /// <param name="_publishing">ID издательства.</param>
+    /// <param name="_rent">ID аренды.</param>
+    /// <param name="_title">Название книги.</param>
+    /// <param name="_publish">Дата публикации.</param>
+    /// <param name="_genre">Жанр книги.</param>
+    public Book(SQLiteConnection connection, int _autor, int _publishing, int _rent, string? _title, string? _publish, string? _genre)
+    {
+        if (!IsValid(new object[] {_autor, _publishing, _rent, _title ?? "", _publish ?? "", _genre ?? ""})) { return; }
+
+        string sql = "INSERT INTO BOOK (Autor, Publishing, Rent, Title, Publish, Genre) VALUES (@Autor, @Publishing, @Rent, @Title, @Publish, @Genre)";
+        SQLiteCommand command = new SQLiteCommand(sql, connection);
+
+        command.Parameters.AddWithValue("@Autor", _autor);
+        command.Parameters.AddWithValue("@Publishing", _publishing);
+        command.Parameters.AddWithValue("@Rent", _rent);
+        command.Parameters.AddWithValue("@Title", _title);
+        command.Parameters.AddWithValue("@Publish", _publish);
+        command.Parameters.AddWithValue("@Genre", _genre);
+
+        command.ExecuteNonQuery();
+    }
+    /// <summary>
+    /// Загрузка данных из базы данных.
+    /// </summary>
+    /// <param name="id">ID загружаемого элемента.</param>
+    /// <param name="connection">Путь к базе данных.</param>
+    /// <param name="NotRent">true для вывода неарендованных книг.</param>
+    public bool LoadFromBase(int id, SQLiteConnection connection, bool NotRent = false) 
     {
         string com = "SELECT * FROM BOOK WHERE ID = @ID";
         using (connection)
@@ -353,14 +538,7 @@ public class Book : BDTypes
             using (SQLiteCommand command = new SQLiteCommand(com, connection))
             {
                 command.Parameters.AddWithValue("@ID", id);
-                if (parameters != null)
-                {
-                    foreach (string parameter in parameters)
-                    {
-                        string[] param = parameter.Split('=');
-                        command.Parameters.AddWithValue(param[0], param[1]);
-                    }
-                }
+
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -373,13 +551,20 @@ public class Book : BDTypes
                         this.Publish = reader.GetString(5);
                         this.Genre = reader.GetString(6);
 
-                        connection.Close(); return true;
+                        if (NotRent) { if (this.Rent != 0) this.ID = 0; }
+
+                        connection.Close();
+                        
+                        return true;
                     }
                     else { connection.Close(); return false; }
                 }
             }
         }
     }
+    /// <summary>
+    /// Преобразование в GustomItem : AvaloniaGrid для отображения в ListBox.
+    /// </summary>
     public CustomItem ToListBoxItem()
     {
         CustomItem grid = CreateGrid("1111314");

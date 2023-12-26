@@ -32,14 +32,14 @@ public partial class UserWindow : Window
     private void Button_Create(object sender, RoutedEventArgs e)
     {
         Button button = (Button)sender;
-        Create type; bool rent = false;
+        Create type;
         switch(button.Content)
         {
-            case "Читатель":    type = Create.Reader;                   break;
-            case "Аренда":      type = Create.Rent;     rent = true;    break;  
-            default:            type = Create.Autor;                    break;
+            case "Читатель":    type = Create.Reader;   break;
+            case "Аренда":      type = Create.Rent;     break;  
+            default:            type = Create.Autor;    break;
         }
-        AdminCreate create = new AdminCreate(type, rent, ID);
+        AdminCreate create = new AdminCreate(type, ID);
         create.Show();
     }
     /// <summary>

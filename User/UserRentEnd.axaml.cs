@@ -52,41 +52,14 @@ public partial class RentList : Window
     public void CreateRemoveList()
     {
         ObjectList.Items.Clear();
-        string ratio = "111222"; string[] typeFields  = new string[] {"ID", "Reader", "Librarian", "Status", "Start_t", "End_t"};
-        BlockTypes.Text = "";
+        int id = 1; string[] typeFields= System.Array.Empty<string>();
+        typeFields = new string[] {"ID", "Reader", "Librarian", "Status", "Start_t"};
+        while (true) {
+            Rent rent = new Rent();
+            if (!rent.LoadFromBase(id, new SQLiteConnection("Data Source=Data/DataBase.db;Version=3;"))) { break; }
+            ObjectList.Items.Add(rent.ToListBoxItem()); id++; 
+        }
         foreach (string name in typeFields) BlockTypes.Text += name + "\t\t\t";
-        using (SQLiteConnection connection = new SQLiteConnection("Data Source=Data/DataBase.db;Version=3;"))
-        {
-        connection.Open();
-        using (SQLiteCommand command = new SQLiteCommand("SELECT * FROM RENT", connection))
-        {
-        using (SQLiteDataReader reader = command.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                CustomItem grid = new CustomItem();
-                string[] parts = new string[100]; int index = 0;
-                foreach (char width in ratio) grid.ColumnDefinitions.Add
-                    (new ColumnDefinition { Width = new GridLength(width-'0', GridUnitType.Star) });
-                
-                #pragma warning disable CS8601
-                foreach (string typeF in typeFields) { parts[index] = reader[typeF].ToString(); index++; }
-                #pragma warning restore CS8601
-
-                for (int i = 0; i < parts.Length; i++)
-                {
-                    TextBlock textBox = new TextBlock { Text = parts[i] };
-                    Grid.SetColumn(textBox, i);
-                    grid.Children.Add(textBox);
-                }
-
-                grid.Fill(parts);
-                ObjectList.Items.Add(grid);
-            }
-        }
-        }
-        connection.Close();
-        }
     }
     /// <summary>
     /// Обработчик события нажатия на кнопку удаления.

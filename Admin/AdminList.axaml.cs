@@ -28,7 +28,7 @@ public partial class AdminList : Window
     public void CreateList(ListType type, bool bookRent = false)
     {
         ObjectList.Items.Clear();
-        int id = 1; string[] typeFields= System.Array.Empty<string>(); 
+        int id = 1; string[] typeFields= System.Array.Empty<string>();
         switch(type)
         {
             case ListType.Autor:
@@ -60,7 +60,7 @@ public partial class AdminList : Window
                     ObjectList.Items.Add(librarian.ToListBoxItem()); id++;
                 } break;
             case ListType.Rent:
-                typeFields = new string[] {"ID", "Reader", "Librarian", "Status", "Start_t"};
+                typeFields = new string[] {"ID", "Reader", "Librarian", "Status", "Start_t", "End_t"};
                 while (true) {
                     Rent rent = new Rent();
                     if (!rent.LoadFromBase(id, new SQLiteConnection("Data Source=Data/DataBase.db;Version=3;"))) { break; }
@@ -70,8 +70,8 @@ public partial class AdminList : Window
                 typeFields = new string[] {"ID", "Autor", "Publishing", "Rent", "Title", "Publish", "Genre"};
                 while (true) {
                     Book book = new Book();
-                    if (!book.LoadFromBase(id, new SQLiteConnection("Data Source=Data/DataBase.db;Version=3;"), bookRent ? new List<string> { "Rent != 0" } : null)) { break; }
-                    ObjectList.Items.Add(book.ToListBoxItem()); id++;
+                    if (!book.LoadFromBase(id, new SQLiteConnection("Data Source=Data/DataBase.db;Version=3;"), bookRent)) { break; }
+                    if (book.Is0ID()) ObjectList.Items.Add(book.ToListBoxItem()); id++;
                 } break;
             default: break;
         }

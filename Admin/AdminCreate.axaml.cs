@@ -103,9 +103,8 @@ public partial class AdminCreate : Window
     /// Создание полей для ввода значений элементов для сохранения.
     /// </summary>
     /// <param name="create">Тип создаваемого элемента.</param>
-    /// <param name="rent">true, если не требуется вывод арендованных книг.</param>
     /// <param name="id">ID библиотекаря.</param>
-    public AdminCreate(Create create, bool rent = false, int id = 0)
+    public AdminCreate(Create create, int id = 0)
     { 
         InitializeComponent();
         string imagePath = Path.Combine("Images", "plus.png");
@@ -159,7 +158,7 @@ public partial class AdminCreate : Window
                 this.Title = "Новая аренда";
                 this.Height = 2 * 75 + 100;
                 CreateField(ListType.Reader);
-                CreateField(ListType.Book, rent);
+                CreateField(ListType.Book, true);
                 break;
             default: break;
         }
@@ -187,19 +186,28 @@ public partial class AdminCreate : Window
             switch (type)
             {
                 case Create.Autor:
-                    SaveAutor(connection);
+                    Autor? autor = new Autor(connection, textBoxes[0].Text, textBoxes[1].Text, textBoxes[2].Text, textBoxes[3].Text);
+                    if (autor.IsValid(new object[] {textBoxes[0].Text ?? "", textBoxes[1].Text ?? "", textBoxes[2].Text ?? "", textBoxes[3].Text ?? ""})) this.Close();
                     break;
                 case Create.Publishing:
-                    SavePublishing(connection);
+                    Publishing? publishing = new Publishing(connection, textBoxes[0].Text, textBoxes[1].Text, textBoxes[2].Text, textBoxes[3].Text);
+                    if (publishing.IsValid(new object[] {textBoxes[0].Text ?? "", textBoxes[1].Text ?? "", textBoxes[2].Text ?? "", textBoxes[3].Text ?? ""})) this.Close();
                     break;
                 case Create.Librarian:
-                    SaveLibrarian(connection);
+                    Librarian? librarian = new Librarian(connection, textBoxes[0].Text, textBoxes[1].Text, textBoxes[2].Text);
+                    if (librarian.IsValid(new object[] {textBoxes[0].Text ?? "", textBoxes[1].Text ?? "", textBoxes[2].Text ?? ""})) this.Close();
                     break;
                 case Create.Book:
-                    SaveBook(connection);
+                    int parsedValue1;
+                    int parsedValue2;
+                    int.TryParse(buttons[0].Content?.ToString(), out parsedValue1);
+                    int.TryParse(buttons[1].Content?.ToString(), out parsedValue2);
+                    Book? book = new Book(connection, parsedValue1, parsedValue2, 0, textBoxes[0].Text, textBoxes[1].Text, textBoxes[2].Text);
+                    if (book.IsValid(new object[] {parsedValue1, parsedValue2, 0, textBoxes[0].Text ?? "", textBoxes[1].Text ?? "", textBoxes[2].Text ?? ""})) this.Close();
                     break;
                 case Create.Reader:
-                    SaveReader(connection);
+                    Reader? reader = new Reader(connection, textBoxes[0].Text, textBoxes[1].Text, textBoxes[2].Text, textBoxes[3].Text, textBoxes[4].Text);
+                    if (reader.IsValid(new object[] {textBoxes[0].Text ?? "", textBoxes[1].Text ?? "", textBoxes[2].Text ?? "", textBoxes[3].Text ?? "", textBoxes[4].Text ?? ""})) this.Close();
                     break;
                 case Create.Rent:
                     SaveRent(connection);
@@ -207,165 +215,6 @@ public partial class AdminCreate : Window
             }
             connection.Close();
         }
-    }
-    /// <summary>
-    /// Сохранение автора в базу данных.
-    /// </summary>
-    /// <param name="connection">Путь к базе данных SQLite.</param>
-    private void SaveAutor(SQLiteConnection connection)
-    {
-        var autor = new 
-        { 
-            Name = textBoxes[0].Text, 
-            Surname = textBoxes[1].Text, 
-            Country = textBoxes[2].Text, 
-            Birth = textBoxes[3].Text 
-        };
-
-        if (string.IsNullOrEmpty(autor.Name) || string.IsNullOrEmpty(autor.Surname) || string.IsNullOrEmpty(autor.Country) || string.IsNullOrEmpty(autor.Birth))
-        {
-            return;
-        }
-
-        string sql = "INSERT INTO AUTOR (Name, Surname, Country, Birth) VALUES (@Name, @Surname, @Country, @Birth)";
-        SQLiteCommand command = new SQLiteCommand(sql, connection);
-
-        command.Parameters.AddWithValue("@Name", autor.Name);
-        command.Parameters.AddWithValue("@Surname", autor.Surname);
-        command.Parameters.AddWithValue("@Country", autor.Country);
-        command.Parameters.AddWithValue("@Birth", autor.Birth);
-
-        command.ExecuteNonQuery();
-        this.Close();
-    }
-    /// <summary>
-    /// Сохранение издательства в базу данных.
-    /// </summary>
-    /// <param name="connection">Путь к базе данных SQLite.</param>
-    private void SavePublishing(SQLiteConnection connection)
-    {
-        var publishing = new 
-        { 
-            Title = textBoxes[0].Text, 
-            Town = textBoxes[1].Text, 
-            Country = textBoxes[2].Text, 
-            Adress = textBoxes[3].Text 
-        };
-
-        if (string.IsNullOrEmpty(publishing.Title) || string.IsNullOrEmpty(publishing.Town) || string.IsNullOrEmpty(publishing.Country) || string.IsNullOrEmpty(publishing.Adress))
-        {
-            return;
-        }
-
-        string sql = "INSERT INTO PUBLISHING (Title, Town, Country, Adress) VALUES (@Title, @Town, @Country, @Adress)";
-        SQLiteCommand command = new SQLiteCommand(sql, connection);
-
-        command.Parameters.AddWithValue("@Title", publishing.Title);
-        command.Parameters.AddWithValue("@Town", publishing.Town);
-        command.Parameters.AddWithValue("@Country", publishing.Country);
-        command.Parameters.AddWithValue("@Adress", publishing.Adress);
-
-        command.ExecuteNonQuery();
-        this.Close();
-    }
-    /// <summary>
-    /// Сохранение библиотекаря в базу данных.
-    /// </summary>
-    /// <param name="connection">Путь к базе данных SQLite.</param>
-    private void SaveLibrarian(SQLiteConnection connection)
-    {
-        var librarian = new 
-        { 
-            Name = textBoxes[0].Text, 
-            Surname = textBoxes[1].Text, 
-            POST = textBoxes[2].Text 
-        };
-
-        if (string.IsNullOrEmpty(librarian.Name) || string.IsNullOrEmpty(librarian.Surname) || string.IsNullOrEmpty(librarian.POST))
-        {
-            return;
-        }
-
-        string sql = "INSERT INTO LIBRARIAN (Name, Surname, POST) VALUES (@Name, @Surname, @POST)";
-        SQLiteCommand command = new SQLiteCommand(sql, connection);
-
-        command.Parameters.AddWithValue("@Name", librarian.Name);
-        command.Parameters.AddWithValue("@Surname", librarian.Surname);
-        command.Parameters.AddWithValue("@POST", librarian.POST);
-
-        command.ExecuteNonQuery();
-        this.Close();
-    }
-    /// <summary>
-    /// Сохранение книги в базу данных.
-    /// </summary>
-    /// <param name="connection">Путь к базе данных SQLite.</param>
-    private void SaveBook(SQLiteConnection connection)
-    {
-        int parsedValue1;
-        int parsedValue2;
-        int.TryParse(buttons[0].Content?.ToString(), out parsedValue1);
-        int.TryParse(buttons[1].Content?.ToString(), out parsedValue2);
-        var book = new 
-        { 
-            Autor = parsedValue1, 
-            Publishing = parsedValue2, 
-            Rent = 0, 
-            Title = textBoxes[0].Text,
-            Publish = textBoxes[1].Text, 
-            Genre = textBoxes[2].Text
-        };
-
-        if (string.IsNullOrEmpty(book.Title) || string.IsNullOrEmpty(book.Publish) || string.IsNullOrEmpty(book.Genre))
-        {
-            return;
-        }
-
-        string sql = "INSERT INTO BOOK (Autor, Publishing, Rent, Title, Publish, Genre) VALUES (@Autor, @Publishing, @Rent, @Title, @Publish, @Genre)";
-        SQLiteCommand command = new SQLiteCommand(sql, connection);
-
-        command.Parameters.AddWithValue("@Autor", book.Autor);
-        command.Parameters.AddWithValue("@Publishing", book.Publishing);
-        command.Parameters.AddWithValue("@Rent", book.Rent);
-        command.Parameters.AddWithValue("@Title", book.Title);
-        command.Parameters.AddWithValue("@Publish", book.Publish);
-        command.Parameters.AddWithValue("@Genre", book.Genre);
-
-        command.ExecuteNonQuery();
-        this.Close();
-    }
-    /// <summary>
-    /// Сохранение читателя в базу данных.
-    /// </summary>
-    /// <param name="connection">Путь к базе данных SQLite.</param>
-    private void SaveReader(SQLiteConnection connection)
-    {
-        var reader = new 
-        { 
-            Name = textBoxes[0].Text, 
-            Surname = textBoxes[1].Text, 
-            Email = textBoxes[2].Text,
-            Phone = textBoxes[3].Text,
-            Adress = textBoxes[4].Text
-        };
-
-        if (string.IsNullOrEmpty(reader.Name) || string.IsNullOrEmpty(reader.Surname) || string.IsNullOrEmpty(reader.Email)
-            || string.IsNullOrEmpty(reader.Phone) || string.IsNullOrEmpty(reader.Adress))
-        {
-            return;
-        }
-
-        string sql = "INSERT INTO READER (Name, Surname, Email, Phone, Adress) VALUES (@Name, @Surname, @Email, @Phone, @Adress)";
-        SQLiteCommand command = new SQLiteCommand(sql, connection);
-
-        command.Parameters.AddWithValue("@Name", reader.Name);
-        command.Parameters.AddWithValue("@Surname", reader.Surname);
-        command.Parameters.AddWithValue("@Email", reader.Email);
-        command.Parameters.AddWithValue("@Phone", reader.Phone);
-        command.Parameters.AddWithValue("@Adress", reader.Adress);
-
-        command.ExecuteNonQuery();
-        this.Close();
     }
     /// <summary>
     /// Сохранение аренды в базу данных.
@@ -376,36 +225,22 @@ public partial class AdminCreate : Window
         int parsedValue1; int parsedValue2;
         int.TryParse(buttons[0].Content?.ToString(), out parsedValue1);
         int.TryParse(buttons[1].Content?.ToString(), out parsedValue2);
-        var rent = new 
-        { 
-            Reader = parsedValue1, 
-            Librarian = ID, 
-            Status = 1, 
-            Start_t = DateTime.Now.ToString(),
-            End_t = DateTime.Now.AddMonths(2).ToString()
-        };
+        string Start_t = DateTime.Now.ToString();
+        string End_t = DateTime.Now.AddMonths(2).ToString();
 
-        string sql = "INSERT INTO RENT (Reader, Librarian, Status, Start_t, End_t) VALUES (@Reader, @Librarian, @Status, @Start_t, @End_t)";
+        Rent? rent = new Rent(connection, parsedValue1, ID, 1, Start_t, End_t);
+        if (rent.IsValid(new object[] {connection, parsedValue1, ID, 1, Start_t ?? "", End_t ?? "" })) this.Close();
+
+        string sql = "SELECT ID FROM RENT WHERE Reader = @Reader AND Librarian = @Librarian AND Status = @Status AND Start_t = @Start_t AND End_t = @End_t; SELECT last_insert_rowid()";
         SQLiteCommand command = new SQLiteCommand(sql, connection);
 
-        command.Parameters.AddWithValue("@Reader", rent.Reader);
-        command.Parameters.AddWithValue("@Librarian", rent.Librarian);
-        command.Parameters.AddWithValue("@Status", rent.Status);
-        command.Parameters.AddWithValue("@Start_t", rent.Start_t);
-        command.Parameters.AddWithValue("@End_t", rent.End_t);
+        command.Parameters.AddWithValue("@Reader", parsedValue1);
+        command.Parameters.AddWithValue("@Librarian", ID);
+        command.Parameters.AddWithValue("@Status", 1);
+        command.Parameters.AddWithValue("@Start_t", Start_t);
+        command.Parameters.AddWithValue("@End_t", End_t);
 
-        command.ExecuteNonQuery();
-
-        string new_sql = "SELECT ID FROM RENT WHERE Reader = @Reader AND Librarian = @Librarian AND Status = @Status AND Start_t = @Start_t AND End_t = @End_t; SELECT last_insert_rowid()";
-        SQLiteCommand new_command = new SQLiteCommand(new_sql, connection);
-
-        new_command.Parameters.AddWithValue("@Reader", rent.Reader);
-        new_command.Parameters.AddWithValue("@Librarian", rent.Librarian);
-        new_command.Parameters.AddWithValue("@Status", rent.Status);
-        new_command.Parameters.AddWithValue("@Start_t", rent.Start_t);
-        new_command.Parameters.AddWithValue("@End_t", rent.End_t);
-
-        int rentId = (int)(long)new_command.ExecuteScalar();
+        int rentId = (int)(long)command.ExecuteScalar();
 
         string updateSql = "UPDATE BOOK SET Rent = @Rent WHERE ID = @ID";
         SQLiteCommand updateCommand = new SQLiteCommand(updateSql, connection);
