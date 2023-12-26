@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['onframeworkinitializationcompleted_0',['OnFrameworkInitializationCompleted',['../classLibraryManager_1_1App.html#a5a2c52b6e5728ba410b2b07c622aab73',1,'LibraryManager::App']]]
+  ['main_0',['Main',['../classLibraryManager_1_1Program.html#a751c8b2a7b7f25d2b27855c7b220610c',1,'LibraryManager::Program']]]
 ];

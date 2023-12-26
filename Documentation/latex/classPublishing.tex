@@ -14,12 +14,21 @@ Inheritance diagram for Publishing\+:\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classPublishing_a200fd31945ace93465b9553f64f2c72e}\label{classPublishing_a200fd31945ace93465b9553f64f2c72e} 
-bool {\bfseries Load\+From\+Base} (int id, SQLite\+Connection connection, List$<$ string $>$? parameters=null)
-\item 
+\Hypertarget{classPublishing_a43c7c02fccf174cdc1fafcdf2163b287}\label{classPublishing_a43c7c02fccf174cdc1fafcdf2163b287} 
+{\bfseries Publishing} ()
+\begin{DoxyCompactList}\small\item\em Пустое издательство. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPublishing_a115f0ca892e3a07c9ee1ee633b67886a}{Publishing}} (SQLite\+Connection connection, string? \+\_\+title, string? \+\_\+town, string? \+\_\+country, string? \+\_\+adress)
+\begin{DoxyCompactList}\small\item\em Сохранение Издательства в базу данных. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPublishing_a2ec2d5d8078315150b4d222aa5d638ae}{Load\+From\+Base}} (int id, SQLite\+Connection connection)
+\begin{DoxyCompactList}\small\item\em Загрузка данных из базы данных. \end{DoxyCompactList}\item 
 \Hypertarget{classPublishing_ac7054d057adf7fd3134b3a9a05a1b699}\label{classPublishing_ac7054d057adf7fd3134b3a9a05a1b699} 
 \mbox{\hyperlink{classLibraryManager_1_1CustomItem}{Custom\+Item}} {\bfseries To\+List\+Box\+Item} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Преобразование в Gustom\+Item \+: Avalonia\+Grid для отображения в List\+Box. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classBDTypes}{BDTypes}}}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries Is\+Valid} (object\mbox{[}$\,$\mbox{]}? parameters)
+\begin{DoxyCompactList}\small\item\em Проверка введенных данных для создания записей в базе данных. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
@@ -44,12 +53,58 @@ int {\bfseries ID}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classBDTypes}{BDTypes}}}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classLibraryManager_1_1CustomItem}{Custom\+Item}} {\bfseries Create\+Grid} (string ratio)
+\mbox{\hyperlink{classLibraryManager_1_1CustomItem}{Custom\+Item}} \mbox{\hyperlink{classBDTypes_a47ffb422effa36b8239f2b8a806d944b}{Create\+Grid}} (string ratio)
 \begin{DoxyCompactList}\small\item\em Создание таблицы для отображения содержимого элементов List\+Box. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Класс объектов Издательство. Наследование от базового типа DBTypes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPublishing_a115f0ca892e3a07c9ee1ee633b67886a}\label{classPublishing_a115f0ca892e3a07c9ee1ee633b67886a} 
+\index{Publishing@{Publishing}!Publishing@{Publishing}}
+\index{Publishing@{Publishing}!Publishing@{Publishing}}
+\doxysubsubsection{\texorpdfstring{Publishing()}{Publishing()}}
+{\footnotesize\ttfamily Publishing.\+Publishing (\begin{DoxyParamCaption}\item[{SQLite\+Connection}]{connection,  }\item[{string?}]{\+\_\+title,  }\item[{string?}]{\+\_\+town,  }\item[{string?}]{\+\_\+country,  }\item[{string?}]{\+\_\+adress }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Сохранение Издательства в базу данных. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & Путь к базе данных.\\
+\hline
+{\em \+\_\+title} & Название издательства.\\
+\hline
+{\em \+\_\+town} & Город издательства.\\
+\hline
+{\em \+\_\+country} & Страна издательства.\\
+\hline
+{\em \+\_\+adress} & Адрес издательства.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPublishing_a2ec2d5d8078315150b4d222aa5d638ae}\label{classPublishing_a2ec2d5d8078315150b4d222aa5d638ae} 
+\index{Publishing@{Publishing}!LoadFromBase@{LoadFromBase}}
+\index{LoadFromBase@{LoadFromBase}!Publishing@{Publishing}}
+\doxysubsubsection{\texorpdfstring{LoadFromBase()}{LoadFromBase()}}
+{\footnotesize\ttfamily bool Publishing.\+Load\+From\+Base (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{SQLite\+Connection}]{connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Загрузка данных из базы данных. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID загружаемого элемента.\\
+\hline
+{\em connection} & Путь к базе данных.\\
+\hline
+\end{DoxyParams}
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

@@ -18,7 +18,7 @@ void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_aa871f778bf97bfa27c39eb
 \begin{DoxyCompactList}\small\item\em Создание Text\+Box поля для ввода значений создаваемого элемента. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_a81bb53246777ac6c4064f97a55252b0b}{Create\+Field}} (\mbox{\hyperlink{namespaceLibraryManager_a3db68b5528c30eedd4aa639809ff4942}{List\+Type}} Name\+Field, bool rent=false)
 \begin{DoxyCompactList}\small\item\em Создание кнопки для вывода листа для выбора значений создаваемого элемента. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classLibraryManager_1_1AdminCreate_adbd34a7bc0e23431271246c30fcc2ab3}{Admin\+Create}} (\mbox{\hyperlink{namespaceLibraryManager_a616fadb5e431318be1d028870fe8c3fd}{Create}} create, bool rent=false, int id=0)
+\mbox{\hyperlink{classLibraryManager_1_1AdminCreate_acf9e83bf30f6ef034794b4c4900f6573}{Admin\+Create}} (\mbox{\hyperlink{namespaceLibraryManager_a616fadb5e431318be1d028870fe8c3fd}{Create}} create, int id=0)
 \begin{DoxyCompactList}\small\item\em Конструктор Admin\+Create. Инициализирует компоненты окна и устанавливает иконку plus.\+png. Создание полей для ввода значений элементов для сохранения. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -28,16 +28,6 @@ void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_ae578a6561f217853474ced
 \Hypertarget{classLibraryManager_1_1AdminCreate_a2792fecae88a0719b121d4c9cbbb4508}\label{classLibraryManager_1_1AdminCreate_a2792fecae88a0719b121d4c9cbbb4508} 
 void {\bfseries Button\+\_\+\+Click} (object? sender, Routed\+Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Обработчик события нажатия на кнопку сохранения. При нажатии вызывает необходимую функцию записи в базу данных. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_a3d2c9472de9b9dc59b5ff56c53f4f257}{Save\+Autor}} (SQLite\+Connection connection)
-\begin{DoxyCompactList}\small\item\em Сохранение автора в базу данных. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_ad1206b5814f6095a61e9d0fe6e001ea1}{Save\+Publishing}} (SQLite\+Connection connection)
-\begin{DoxyCompactList}\small\item\em Сохранение издательства в базу данных. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_a2df013fb17fe7c09f12b735eb85f1c7e}{Save\+Librarian}} (SQLite\+Connection connection)
-\begin{DoxyCompactList}\small\item\em Сохранение библиотекаря в базу данных. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_a0cbdbf45f665d90cfbe6ae0a3b2e9058}{Save\+Book}} (SQLite\+Connection connection)
-\begin{DoxyCompactList}\small\item\em Сохранение книги в базу данных. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_a0ce2c384edd2743ee63e3fe2642d4446}{Save\+Reader}} (SQLite\+Connection connection)
-\begin{DoxyCompactList}\small\item\em Сохранение читателя в базу данных. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classLibraryManager_1_1AdminCreate_ab2343cdbcc0fb872cb57baf3d9c7549a}{Save\+Rent}} (SQLite\+Connection connection)
 \begin{DoxyCompactList}\small\item\em Сохранение аренды в базу данных. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
@@ -61,11 +51,11 @@ List$<$ Button $>$ {\bfseries buttons} = new List$<$Button$>$()
 Класс окна создания записей. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classLibraryManager_1_1AdminCreate_adbd34a7bc0e23431271246c30fcc2ab3}\label{classLibraryManager_1_1AdminCreate_adbd34a7bc0e23431271246c30fcc2ab3} 
+\Hypertarget{classLibraryManager_1_1AdminCreate_acf9e83bf30f6ef034794b4c4900f6573}\label{classLibraryManager_1_1AdminCreate_acf9e83bf30f6ef034794b4c4900f6573} 
 \index{LibraryManager.AdminCreate@{LibraryManager.AdminCreate}!AdminCreate@{AdminCreate}}
 \index{AdminCreate@{AdminCreate}!LibraryManager.AdminCreate@{LibraryManager.AdminCreate}}
 \doxysubsubsection{\texorpdfstring{AdminCreate()}{AdminCreate()}}
-{\footnotesize\ttfamily Library\+Manager.\+Admin\+Create.\+Admin\+Create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceLibraryManager_a616fadb5e431318be1d028870fe8c3fd}{Create}}}]{create,  }\item[{bool}]{rent = {\ttfamily false},  }\item[{int}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Library\+Manager.\+Admin\+Create.\+Admin\+Create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceLibraryManager_a616fadb5e431318be1d028870fe8c3fd}{Create}}}]{create,  }\item[{int}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -74,8 +64,6 @@ List$<$ Button $>$ {\bfseries buttons} = new List$<$Button$>$()
 
 \begin{DoxyParams}{Parameters}
 {\em create} & Тип создаваемого элемента.\\
-\hline
-{\em rent} & true, если не требуется вывод арендованных книг.\\
 \hline
 {\em id} & ID библиотекаря.\\
 \hline
@@ -130,81 +118,6 @@ List$<$ Button $>$ {\bfseries buttons} = new List$<$Button$>$()
 
 \begin{DoxyParams}{Parameters}
 {\em name\+Field} & Строка названия\\
-\hline
-\end{DoxyParams}
-\Hypertarget{classLibraryManager_1_1AdminCreate_a3d2c9472de9b9dc59b5ff56c53f4f257}\label{classLibraryManager_1_1AdminCreate_a3d2c9472de9b9dc59b5ff56c53f4f257} 
-\index{LibraryManager.AdminCreate@{LibraryManager.AdminCreate}!SaveAutor@{SaveAutor}}
-\index{SaveAutor@{SaveAutor}!LibraryManager.AdminCreate@{LibraryManager.AdminCreate}}
-\doxysubsubsection{\texorpdfstring{SaveAutor()}{SaveAutor()}}
-{\footnotesize\ttfamily void Library\+Manager.\+Admin\+Create.\+Save\+Autor (\begin{DoxyParamCaption}\item[{SQLite\+Connection}]{connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Сохранение автора в базу данных. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em connection} & Путь к базе данных SQLite.\\
-\hline
-\end{DoxyParams}
-\Hypertarget{classLibraryManager_1_1AdminCreate_a0cbdbf45f665d90cfbe6ae0a3b2e9058}\label{classLibraryManager_1_1AdminCreate_a0cbdbf45f665d90cfbe6ae0a3b2e9058} 
-\index{LibraryManager.AdminCreate@{LibraryManager.AdminCreate}!SaveBook@{SaveBook}}
-\index{SaveBook@{SaveBook}!LibraryManager.AdminCreate@{LibraryManager.AdminCreate}}
-\doxysubsubsection{\texorpdfstring{SaveBook()}{SaveBook()}}
-{\footnotesize\ttfamily void Library\+Manager.\+Admin\+Create.\+Save\+Book (\begin{DoxyParamCaption}\item[{SQLite\+Connection}]{connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Сохранение книги в базу данных. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em connection} & Путь к базе данных SQLite.\\
-\hline
-\end{DoxyParams}
-\Hypertarget{classLibraryManager_1_1AdminCreate_a2df013fb17fe7c09f12b735eb85f1c7e}\label{classLibraryManager_1_1AdminCreate_a2df013fb17fe7c09f12b735eb85f1c7e} 
-\index{LibraryManager.AdminCreate@{LibraryManager.AdminCreate}!SaveLibrarian@{SaveLibrarian}}
-\index{SaveLibrarian@{SaveLibrarian}!LibraryManager.AdminCreate@{LibraryManager.AdminCreate}}
-\doxysubsubsection{\texorpdfstring{SaveLibrarian()}{SaveLibrarian()}}
-{\footnotesize\ttfamily void Library\+Manager.\+Admin\+Create.\+Save\+Librarian (\begin{DoxyParamCaption}\item[{SQLite\+Connection}]{connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Сохранение библиотекаря в базу данных. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em connection} & Путь к базе данных SQLite.\\
-\hline
-\end{DoxyParams}
-\Hypertarget{classLibraryManager_1_1AdminCreate_ad1206b5814f6095a61e9d0fe6e001ea1}\label{classLibraryManager_1_1AdminCreate_ad1206b5814f6095a61e9d0fe6e001ea1} 
-\index{LibraryManager.AdminCreate@{LibraryManager.AdminCreate}!SavePublishing@{SavePublishing}}
-\index{SavePublishing@{SavePublishing}!LibraryManager.AdminCreate@{LibraryManager.AdminCreate}}
-\doxysubsubsection{\texorpdfstring{SavePublishing()}{SavePublishing()}}
-{\footnotesize\ttfamily void Library\+Manager.\+Admin\+Create.\+Save\+Publishing (\begin{DoxyParamCaption}\item[{SQLite\+Connection}]{connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Сохранение издательства в базу данных. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em connection} & Путь к базе данных SQLite.\\
-\hline
-\end{DoxyParams}
-\Hypertarget{classLibraryManager_1_1AdminCreate_a0ce2c384edd2743ee63e3fe2642d4446}\label{classLibraryManager_1_1AdminCreate_a0ce2c384edd2743ee63e3fe2642d4446} 
-\index{LibraryManager.AdminCreate@{LibraryManager.AdminCreate}!SaveReader@{SaveReader}}
-\index{SaveReader@{SaveReader}!LibraryManager.AdminCreate@{LibraryManager.AdminCreate}}
-\doxysubsubsection{\texorpdfstring{SaveReader()}{SaveReader()}}
-{\footnotesize\ttfamily void Library\+Manager.\+Admin\+Create.\+Save\+Reader (\begin{DoxyParamCaption}\item[{SQLite\+Connection}]{connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Сохранение читателя в базу данных. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em connection} & Путь к базе данных SQLite.\\
 \hline
 \end{DoxyParams}
 \Hypertarget{classLibraryManager_1_1AdminCreate_ab2343cdbcc0fb872cb57baf3d9c7549a}\label{classLibraryManager_1_1AdminCreate_ab2343cdbcc0fb872cb57baf3d9c7549a} 

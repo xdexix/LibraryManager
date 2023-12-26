@@ -1,4 +1,4 @@
-/* The standard CSS for doxygen 1.10.0*/
+/* The standard CSS for doxygen 1.11.0*/
 
 html {
 /* page base colors */
@@ -604,6 +604,11 @@ a:hover {
 	background:   linear-gradient(to bottom, transparent 0,transparent calc(100% - 1px), currentColor 100%);
 }
 
+a:hover > span.arrow {
+        text-decoration: none;
+        background : var(--nav-background-color);
+}
+
 a.el {
 	font-weight: bold;
 }
@@ -1155,17 +1160,25 @@ dl.reflist dd {
 
 .paramtype {
 	white-space: nowrap;
+	padding: 0px;
+	padding-bottom: 1px;
 }
 
 .paramname {
-	color: var(--memdef-param-name-color);
 	white-space: nowrap;
+        padding: 0px;
+        padding-bottom: 1px;
+        margin-left: 2px;
 }
+
 .paramname em {
+	color: var(--memdef-param-name-color);
 	font-style: normal;
+	margin-right: 1px;
 }
-.paramname code {
-        line-height: 14px;
+
+.paramname .paramdefval {
+	font-family: var(--font-family-monospace);
 }
 
 .params, .retval, .exception, .tparams {
@@ -2190,20 +2203,6 @@ details[open]>summary::before {
     content: "\25bc";
     padding-right:4px;
     font-size: 80%;
-}
-
-/* make the dynamic menu sticky */
-#main-nav, div.sm {
-  position: sticky;
-  top: 0px;
-  width: 100%;
-  z-index: 100;
-}
-@media(max-width:768px)
-{
-  #main-nav {
-    top: 36px;
-  }
 }
 
 body {
